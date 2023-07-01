@@ -8,6 +8,7 @@ import { ButtonPrimary } from '../Buttons/PrimaryButton';
 import { AnimatedView } from '../AnimatedView/AnimatedView';
 import { AnimatedImage } from '../AnimatedImage/AnimatedImage';
 import { LaunchPreviewPlaceholder } from '../LaunchPreviewPlaceholder/LaunchPreviewPlaceholder';
+import FastImage from 'react-native-fast-image';
 
 type ItemProps = {
   Name: string;
@@ -53,7 +54,7 @@ export const LaunchPreview = (props: Props) => {
         }}
       />
 
-      <Image style={styles.gradient} source={require('@/assets/images/Gradient.png')} />
+      <FastImage style={styles.gradient} source={require('@/assets/images/Gradient.png')} />
 
       <View style={styles.innerContainer}>
         <RobotoRegular style={styles.upcomingMissionText}>

@@ -2,6 +2,7 @@ import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { RobotoBold } from '@components/texts';
 import { IconTemplateProps, TabBarIconProps } from './interface';
 import { useNavigation } from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
 
 const IconTemplate = ({ icon, title, focused, stackName }: IconTemplateProps) => {
   const navigation = useNavigation();
@@ -13,7 +14,7 @@ const IconTemplate = ({ icon, title, focused, stackName }: IconTemplateProps) =>
 
   return (
     <TouchableOpacity activeOpacity={1} style={styles.container} onPress={handlePress}>
-      <Image source={icon} style={styles.image} resizeMode='contain' />
+      <FastImage source={icon} style={styles.image} resizeMode='contain' />
       <RobotoBold style={[styles.text, { color: focused ? 'white' : '#505050' }]}>
         {title}
       </RobotoBold>

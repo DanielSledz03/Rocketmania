@@ -24,6 +24,7 @@
     "react": "18.2.0",
     "react-countdown": "^2.3.5",
     "react-native": "0.72.1",
+    "react-native-fast-image": "^8.6.3",
     "react-native-linear-gradient": "^2.7.3",
     "react-native-navigation-bar-color": "^2.0.2",
     "react-native-paper": "^5.9.0",

@@ -15,6 +15,7 @@ import { MainTemplateProps } from './MainTemplate.Interface';
 import { useNavigation } from '@react-navigation/native';
 import { AnimatedView } from '../AnimatedView/AnimatedView';
 import { SCREEN_HEIGHT, isCloseToBottom } from '@/utils';
+import FastImage from 'react-native-fast-image';
 
 export const MainTemplate = (props: MainTemplateProps) => {
   const { refreshing = false } = props;
@@ -64,7 +65,7 @@ export const MainTemplate = (props: MainTemplateProps) => {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={styles.settings}>
-          <Image
+          <FastImage
             style={styles.settingsIcon}
             source={require('@/assets/images/settings.png')}
             resizeMode='contain'

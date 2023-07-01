@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BottomBar from '../BottomBar/BottomBar';
-import { IState } from '@/Store/Reducers';
-import { SET_TO_DARK } from '@/Store/Types/ThemeTypes';
+import { IState } from '@/store/Reducers';
+import { SET_TO_DARK } from '@/store/Types/ThemeTypes';
 import { ThemeDark, ThemeLight } from '@/Constants';
 import { TabNavigation_ScreenOptions } from './TabNavigation.ScreenOptions';
 import { RocketLaunchesStack } from '../Stacks/Launches';
-import * as actionCreators from '@/Store/Actions/ThemeActions';
+import * as actionCreators from '@/store/Actions/ThemeActions';
 
 export type RootStackParamList = {
   RocketLaunchesStack: undefined;
