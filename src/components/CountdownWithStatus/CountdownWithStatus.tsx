@@ -16,7 +16,7 @@ import { TimeLineItem } from './components/TimelineItem';
 import { StatusProps, getDate } from '@/utils';
 
 interface Props {
-  date: Date;
+  date: string;
   style: StyleProp<ViewStyle>;
   countdownStyles?: StyleProp<ViewStyle>;
   status: string;

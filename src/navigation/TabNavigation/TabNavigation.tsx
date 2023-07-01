@@ -7,16 +7,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import BottomBar from '../BottomBar/BottomBar';
 import { IState } from '@/store/Reducers';
 import { SET_TO_DARK } from '@/store/Types/ThemeTypes';
-import { ThemeDark, ThemeLight } from '@/Constants';
+import { ThemeDark, ThemeLight } from '@/constants';
 import { TabNavigation_ScreenOptions } from './TabNavigation.ScreenOptions';
-import { RocketLaunchesStack } from '../Stacks/Launches';
+import { RocketLaunchesStack, RocketLaunchesStackParamList } from '../Stacks/Launches';
 import * as actionCreators from '@/store/Actions/ThemeActions';
 
 export type RootStackParamList = {
-  RocketLaunchesStack: undefined;
+  RocketLaunchesStack: RocketLaunchesStackParamList;
   StarshipStack: undefined;
-  ArticlesStack: undefined;
-  KnowladgebaseStack: undefined;
 };
 
 const Tab = createBottomTabNavigator<RootStackParamList>();

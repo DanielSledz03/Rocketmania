@@ -2,55 +2,40 @@ import { View, StyleSheet, Image, StyleProp, ViewStyle } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 import { RobotoBold, RobotoRegular } from '@components/texts';
 import { CountdownWithStatus } from '../CountdownWithStatus/CountdownWithStatus';
-import { SCREEN_HEIGHT } from '@/utils';
+import { SCREEN_HEIGHT, useFetch } from '@/utils';
 import { LaunchPreviewPlaceholderLayout } from '../LaunchPreviewPlaceholder/Layout';
 import { ButtonPrimary } from '../Buttons/PrimaryButton';
 import { AnimatedView } from '../AnimatedView/AnimatedView';
 import { AnimatedImage } from '../AnimatedImage/AnimatedImage';
 import { LaunchPreviewPlaceholder } from '../LaunchPreviewPlaceholder/LaunchPreviewPlaceholder';
 import FastImage from 'react-native-fast-image';
-
-type ItemProps = {
-  Name: string;
-  Rocket: {
-    data: {
-      attributes: {
-        MainImage: {
-          data: {
-            attributes: {
-              url: string;
-            };
-          };
-        };
-        Name: string;
-      };
-    };
-  };
-  Date: string;
-  Status: string;
-};
+import { Mission } from '@/types/mission';
+import { getFirstLaunch } from '@/constants/Queries/HomePage';
 
 interface Props {
-  item: ItemProps;
   containerStyle?: StyleProp<ViewStyle>;
   countdownStyle?: StyleProp<ViewStyle>;
   buttonTitle: string;
   buttonOnPress: () => void;
+  mission: Mission;
   buttonStyle?: StyleProp<ViewStyle>;
   additionalButton?: boolean;
   additionalButtonOnPress?: () => void;
 }
 
 export const LaunchPreview = (props: Props) => {
-  if (props.item) {
+  const { mission } = props;
+
+  if (!mission) {
     return <LaunchPreviewPlaceholder containerStyle={styles.container} />;
   }
+
   return (
     <AnimatedView style={[styles.container, props.containerStyle]}>
       <AnimatedImage
         style={styles.image}
         source={{
-          uri: props.item.Rocket.data.attributes.MainImage.data.attributes.url,
+          uri: mission.rocket.image.asset.url,
         }}
       />
 
@@ -59,18 +44,16 @@ export const LaunchPreview = (props: Props) => {
       <View style={styles.innerContainer}>
         <RobotoRegular style={styles.upcomingMissionText}>
           {!props.additionalButton ? 'MISJA:' : 'NAJBLIŻSZA MISJA:'}{' '}
-          <RobotoRegular style={styles.missionName}>
-            {props.item.Rocket.data.attributes.Name}
-          </RobotoRegular>
+          <RobotoRegular style={styles.missionName}>{mission.name}</RobotoRegular>
         </RobotoRegular>
 
-        <RobotoBold style={styles.rocketName}>{props.item.Name}</RobotoBold>
+        <RobotoBold style={styles.rocketName}>{mission.rocket.name}</RobotoBold>
 
         <View style={styles.countdownStyle}>
           <CountdownWithStatus
-            date={props.item.Date}
+            date={mission.date}
             style={props.countdownStyle}
-            status={props.item.Status}
+            status={mission.status}
           />
         </View>
         <View style={styles.buttonsContainer}>
@@ -148,7 +131,7 @@ const styles = StyleSheet.create({
     width: '100%',
     lineHeight: 45,
     textTransform: 'uppercase',
-    fontSize: moderateScale(38),
+    fontSize: moderateScale(34),
     marginVertical: 5,
   },
 

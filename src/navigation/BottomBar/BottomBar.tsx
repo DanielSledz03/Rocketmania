@@ -29,14 +29,14 @@ const BottomBar = ({ navigation }: BottomTabBarProps) => {
           title="Artykuły"
           stackName="ArticlesStack"
         /> */}
-
+      {/* 
       <TabBarIcon
         focused={focusedScreen === 'KnowladgebaseStack'}
         icon={require('@/assets/images/navigation/knowladgebase_white.png')}
         iconFocused={require('@/assets/images/navigation/knowladgebase_gray.png')}
         title='Baza wiedzy'
         stackName='KnowladgebaseStack'
-      />
+      /> */}
     </View>
   );
 };

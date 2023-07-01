@@ -4,6 +4,12 @@ import { Provider } from 'react-redux';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import { useEffect } from 'react';
 import { Platform, UIManager } from 'react-native';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'https://voux0k38.api.sanity.io/v1/graphql/production/default',
+  cache: new InMemoryCache(),
+});
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -16,9 +22,11 @@ function App(): JSX.Element {
     changeNavigationBarColor('black');
   }, []);
   return (
-    <Provider store={store}>
-      <TabNavigation />
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <TabNavigation />
+      </Provider>
+    </ApolloProvider>
   );
 }
 

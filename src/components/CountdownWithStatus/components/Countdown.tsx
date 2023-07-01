@@ -7,13 +7,13 @@ import { Unit } from './Unit';
 
 interface Props {
   style: StyleProp<ViewStyle>;
-  date: Date;
+  date: any;
   status: string;
 }
 
 const calculateDiff = (date: Date) => {
-  const date1 = new Date(date);
-  const now = new Date();
+  const date1: any = new Date(date);
+  const now: any = new Date();
   // get total seconds between the times
   let delta = Math.abs(date1 - now) / 1000;
 

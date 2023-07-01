@@ -16,10 +16,14 @@ import { useNavigation } from '@react-navigation/native';
 import { AnimatedView } from '../AnimatedView/AnimatedView';
 import { SCREEN_HEIGHT, isCloseToBottom } from '@/utils';
 import FastImage from 'react-native-fast-image';
+import { RocketLaunchesStackParamList } from '@/navigation/Stacks/Launches';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type MainTemplateNav = NativeStackNavigationProp<RocketLaunchesStackParamList>;
 
 export const MainTemplate = (props: MainTemplateProps) => {
   const { refreshing = false } = props;
-  const navigation = useNavigation();
+  const navigation = useNavigation<MainTemplateNav>();
   const animationHeight = useRef(new Animated.Value(0)).current;
   const increaseHeight = useCallback(
     () =>
