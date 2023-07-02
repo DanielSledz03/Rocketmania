@@ -1,43 +1,29 @@
-import { AnimatedImage, ButtonExpand, PropertiesList } from 'components';
 import { useState } from 'react';
 import { LayoutAnimation, StyleSheet, View } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { RobotoBold, RobotoMedium } from 'texts';
-import { SCREEN_HEIGHT } from 'utils';
+import { AnimatedImage, ButtonExpand } from '@/components';
+import { RobotoBold, RobotoMedium } from '@/components/texts';
+import { Payload as IPayload } from '@/types';
+import { SCREEN_HEIGHT } from '@/utils';
+import { PropertiesList } from '@/view';
 
-interface IProps {
-  payload: {
-    Name: string;
-    Description: string;
-    Specification: string;
-    Role: string;
-    Photo: {
-      data: {
-        attributes: {
-          url: string;
-        };
-      };
-    };
-  };
-}
-
-export const Payload = ({ payload }: IProps) => {
+export const Payload = ({ payload }: { payload: IPayload }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <View style={styles.container}>
-      {payload.Role === 'MainPayload' ? (
+      {payload.role === 'main_payload' ? (
         <RobotoMedium style={styles.role}>ŁADUNEK GŁÓWNY</RobotoMedium>
       ) : (
         <RobotoMedium style={styles.role}>ŁADUNEK DODATKOWY</RobotoMedium>
       )}
-      <RobotoBold style={styles.payloadName}>{payload.Name}</RobotoBold>
-      {payload.Photo?.data?.attributes && expanded && (
+      <RobotoBold style={styles.payloadName}>{payload.name}</RobotoBold>
+      {payload.image?.asset.url && expanded && (
         <AnimatedImage
           style={styles.payloadPhoto}
           resizeMode='cover'
           source={{
-            uri: payload.Photo.data.attributes.url,
+            uri: payload.image?.asset.url,
           }}
         />
       )}
@@ -48,8 +34,8 @@ export const Payload = ({ payload }: IProps) => {
       >
         {expanded && (
           <>
-            <PropertiesList list={payload.Specification?.split('\n')} />
-            <RobotoMedium style={styles.description}>{payload.Description}</RobotoMedium>
+            {payload.specification && <PropertiesList list={payload.specification?.split('\n')} />}
+            <RobotoMedium style={styles.description}>{payload.description}</RobotoMedium>
           </>
         )}
       </View>

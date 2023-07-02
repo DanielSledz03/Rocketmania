@@ -4,7 +4,7 @@ export interface MainTemplateProps {
   children: React.ReactNode;
   containerContentStyles?: ViewPropsAndroid;
   containerStyle?: ViewPropsAndroid;
-  onRefresh?: Function;
+  onRefresh?: () => void;
   refreshing?: boolean;
-  onBottom?: Function;
+  onBottom?: () => void;
 }

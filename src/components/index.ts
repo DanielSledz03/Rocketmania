@@ -15,3 +15,4 @@ export * from './SearchLaunch/SearchLaunch';
 export * from './SectionPreview/SectionPreview';
 export * from './texts/Roboto';
 export * from './VehiclePreview/VehiclePreview';
+export * from './Property/Property';

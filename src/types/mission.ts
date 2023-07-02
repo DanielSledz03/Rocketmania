@@ -1,5 +1,6 @@
 import { Booster } from './booster';
 import { Image } from './image';
+import { Payload } from './payload';
 import { Rocket } from './rocket';
 
 export interface Mission {
@@ -7,7 +8,7 @@ export interface Mission {
   date: string;
   status: string;
   description?: string;
-  specification?: string[];
+  specifications?: string[];
   windowStart?: string;
   windowEnd?: string;
   probability?: number;
@@ -17,4 +18,5 @@ export interface Mission {
   rocket: Rocket;
   _id: string;
   boosters: Booster[];
+  payload: Payload[];
 }

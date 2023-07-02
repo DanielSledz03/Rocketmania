@@ -8,6 +8,8 @@ export const translateDate = (dt: Date) => {
     minutes: date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
   };
 
+  const time = elements.hour + ':' + elements.minutes;
+
   const full =
     elements.day +
     '.' +
@@ -19,5 +21,5 @@ export const translateDate = (dt: Date) => {
     ':' +
     elements.minutes;
 
-  return { ...elements, full };
+  return { ...elements, full, time };
 };

@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { AnimatedView, VehiclePreview } from '@/components';
@@ -13,10 +14,10 @@ export type LaunchDetailsNavigationProp = NativeStackNavigationProp<
   'LaunchDetails'
 >;
 
-export const InformationAboutMission = () => {
+export const InformationAboutMission = memo(function InformationAboutMission() {
   const navigation = useNavigation<LaunchDetailsNavigationProp>();
   const missionDetails = useSelector((state: RootState) => state.missionDetails.missionDetails);
-  console.log(missionDetails?.rocket.image.asset.url);
+
   return (
     <>
       <AnimatedView>
@@ -65,7 +66,7 @@ export const InformationAboutMission = () => {
       </AnimatedView>
     </>
   );
-};
+});
 
 const styles = StyleSheet.create({
   vehiclesPreviewContainer: { marginBottom: 50, marginTop: 15 },

@@ -1,11 +1,10 @@
-import { InformationAboutMission } from './components/InformationAboutMission/InformationAboutMission';
-import { MissionMainInformation } from '../view/MissionMainInformation/MissionMainInformation';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { MainTemplate } from '@/components';
 import { GET_LAUNCH_BY_ID } from '@/constants/Queries/HomePage';
 import { missionsDetailsSliceActions } from '@/store';
 import { useFetch } from '@/utils';
+import { InformationAboutMission, MissionDetails, MissionMainInformation, Payloads } from '@/view';
 
 export const LaunchDetail = (props: {
   route: {
@@ -19,7 +18,7 @@ export const LaunchDetail = (props: {
 
   useEffect(() => {
     dispatch(missionsDetailsSliceActions.setMissionDetails(data?.allMission[0]));
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <MainTemplate
@@ -30,10 +29,9 @@ export const LaunchDetail = (props: {
       }}
     >
       <MissionMainInformation />
-
       <InformationAboutMission />
-      {/* <MissionDetails attributes={attributes} />
-          <Payloads attributes={attributes} /> */}
+      <MissionDetails />
+      <Payloads />
     </MainTemplate>
   );
 };

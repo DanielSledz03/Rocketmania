@@ -83,6 +83,7 @@ query getMissionByID($id: ID) {
     }
 
     payload {
+      _id
       name
       specification
       description
@@ -95,6 +96,7 @@ query getMissionByID($id: ID) {
     }
 
     boosters {
+      _id
       name
       image {
         asset {

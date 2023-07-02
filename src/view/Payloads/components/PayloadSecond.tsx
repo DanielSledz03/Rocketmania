@@ -1,27 +1,12 @@
-import { AnimatedView, PropertiesList } from 'components';
 import { useState } from 'react';
 import { Image, LayoutAnimation, StyleSheet, TouchableOpacity } from 'react-native';
-import { RobotoLight, RobotoMedium } from 'texts';
-import { SCREEN_HEIGHT } from 'utils';
+import { AnimatedView } from '@/components';
+import { RobotoLight, RobotoMedium } from '@/components/texts';
+import { Payload as IPayload } from '@/types';
+import { SCREEN_HEIGHT } from '@/utils';
+import { PropertiesList } from '@/view';
 
-interface IProps {
-  payload: {
-    Name: string;
-    Description: string;
-    Specification: string;
-    Role: string;
-    Photo: {
-      data: {
-        attributes: {
-          url: string;
-        };
-      };
-    };
-  };
-  index: number;
-}
-
-export const PayloadSecond = ({ payload, index }: IProps) => {
+export const PayloadSecond = ({ payload, index }: { payload: IPayload; index: number }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
@@ -29,7 +14,7 @@ export const PayloadSecond = ({ payload, index }: IProps) => {
         onPress={() => {
           setExpanded((prev) => !prev);
         }}
-        disabled={payload.Description === null}
+        disabled={payload.description === null}
         style={styles.container}
       >
         <RobotoLight style={styles.indexText}>{index + 1}.</RobotoLight>
@@ -37,19 +22,19 @@ export const PayloadSecond = ({ payload, index }: IProps) => {
           style={[
             styles.payloadName,
             {
-              color: payload.Description == null ? 'rgba(109, 109, 109, 1)' : 'white',
+              color: payload.description == null ? 'rgba(109, 109, 109, 1)' : 'white',
             },
           ]}
         >
-          {payload.Name}
+          {payload.name}
         </RobotoLight>
-        {payload.Specification && (
+        {payload.specification && (
           <Image
             resizeMode='contain'
             source={
               !expanded
-                ? require('images/expand/expand.png')
-                : require('images/expand/expandRotated.png')
+                ? require('@/assets/images/expand/expand.png')
+                : require('@/assets/images/expand/expandRotated.png')
             }
             style={styles.icon}
           />
@@ -65,21 +50,19 @@ export const PayloadSecond = ({ payload, index }: IProps) => {
         >
           {expanded && (
             <>
-              {payload.Photo?.data?.attributes && (
+              {payload.image?.asset.url && (
                 <Image
                   style={styles.payloadPhoto}
                   resizeMode='cover'
                   source={{
-                    uri: payload.Photo?.data?.attributes?.url,
+                    uri: payload.image?.asset.url,
                   }}
                 />
               )}
 
-              {payload.Specification !== null && (
-                <PropertiesList list={payload.Specification.split('\n')} />
-              )}
+              {payload.specification && <PropertiesList list={payload.specification.split('\n')} />}
 
-              <RobotoMedium style={styles.payloadDescription}>{payload.Description}</RobotoMedium>
+              <RobotoMedium style={styles.payloadDescription}>{payload.description}</RobotoMedium>
             </>
           )}
         </AnimatedView>

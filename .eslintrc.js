@@ -42,7 +42,7 @@ module.exports = {
     //interface
     '@typescript-eslint/consistent-type-exports': 'warn',
     //no console logs
-    'no-console': 'error',
+    'no-console': 'warn',
     //enum duplicates
     '@typescript-eslint/no-duplicate-enum-values': 'warn',
     //dynamic delete from object
