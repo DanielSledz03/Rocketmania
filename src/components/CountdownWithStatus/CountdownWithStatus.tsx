@@ -20,7 +20,7 @@ interface Props {
   style: StyleProp<ViewStyle>;
   countdownStyles?: StyleProp<ViewStyle>;
   status: string;
-  changeLogs?: string;
+  changeLogs?: string[];
 }
 
 export const CountdownWithStatus = (props: Props) => {
@@ -79,12 +79,12 @@ export const CountdownWithStatus = (props: Props) => {
           }}
         >
           {expanded &&
-            changeLogs.split('\n').map((item, index, array) => {
+            changeLogs.map((item, index, array) => {
               return (
                 <TimeLineItem
                   key={index}
-                  date={item.split(' - ')[0]}
-                  text={item.split(' - ')[1]}
+                  date={item.split(': ')[0]}
+                  text={item.split(': ')[1]}
                   isLast={index + 1 === array.length ? true : false}
                 />
               );

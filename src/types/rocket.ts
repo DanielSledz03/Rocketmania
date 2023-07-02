@@ -1,3 +1,4 @@
+import { Agency } from './agency';
 import { Image } from './image';
 
 export interface Rocket {
@@ -11,4 +12,5 @@ export interface Rocket {
   gallery?: {
     image: Image;
   }[];
+  Agencies: Agency[];
 }

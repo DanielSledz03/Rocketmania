@@ -1,10 +1,10 @@
-import { store } from '@/store/store';
 import { TabNavigation } from '@/navigation/TabNavigation/TabNavigation';
 import { Provider } from 'react-redux';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import { useEffect } from 'react';
 import { Platform, UIManager } from 'react-native';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import store from '@/store/store';
 
 const client = new ApolloClient({
   uri: 'https://voux0k38.api.sanity.io/v1/graphql/production/default',

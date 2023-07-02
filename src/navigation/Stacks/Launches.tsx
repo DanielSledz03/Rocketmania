@@ -1,4 +1,6 @@
 import { HomeScreen } from '@/screens/HomeScreen';
+import { LaunchDetail } from '@/screens/LaunchDetail';
+import { MissionsQueque } from '@/screens/MissionsQueque';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
@@ -7,11 +9,7 @@ import {
 export type RocketLaunchesStackParamList = {
   HomeScreen: undefined;
   LaunchDetails: { id: string };
-  BoosterDetails: { id: string };
-  RocketDetails: { id: string };
-  LaunchQueue: undefined;
-  InformationPage: undefined;
-  Settings: undefined;
+  MissionsQueque: undefined;
 };
 
 const RocketStack = createNativeStackNavigator<RocketLaunchesStackParamList>();
@@ -24,7 +22,9 @@ export const RocketLaunchesStack = () => {
   return (
     <RocketStack.Navigator screenOptions={ScreenOptions}>
       <RocketStack.Screen name='HomeScreen' component={HomeScreen} />
-      {/* <RocketStack.Screen name='LaunchDetails' component={LaunchDetail} />
+      <RocketStack.Screen name='MissionsQueque' component={MissionsQueque} />
+      <RocketStack.Screen name='LaunchDetails' component={LaunchDetail} />
+      {/* 
       <RocketStack.Screen name='BoosterDetails' component={BoosterDetails} />
       <RocketStack.Screen name='RocketDetails' component={RocketDetails} />
       <RocketStack.Screen name='LaunchQueue' component={LaunchesQueue} />

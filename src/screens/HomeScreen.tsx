@@ -1,18 +1,18 @@
 import { LaunchPreview } from '@/components/LaunchPreview/LaunchPreview';
 import { MainTemplate } from '@/components/MainTemplate/MainTemplate';
 import { SectionPreview } from '@/components/SectionPreview/SectionPreview';
-import { getFirstLaunch } from '@/constants/Queries/HomePage';
+import { GET_INCOMING_LAUNCH } from '@/constants/Queries/HomePage';
 import { RocketLaunchesStackParamList } from '@/navigation/Stacks/Launches';
 import { useFetch } from '@/utils';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<
   RocketLaunchesStackParamList,
-  'LaunchDetails'
+  'HomeScreen'
 >;
 
 export const HomeScreen = ({ navigation }: { navigation: HomeScreenNavigationProp }) => {
-  const mission = useFetch(getFirstLaunch);
+  const mission = useFetch(GET_INCOMING_LAUNCH);
 
   return (
     <MainTemplate
@@ -25,7 +25,7 @@ export const HomeScreen = ({ navigation }: { navigation: HomeScreenNavigationPro
       <LaunchPreview
         mission={mission.data?.allMission[0]}
         buttonTitle='Kolejne starty »'
-        buttonOnPress={() => navigation.navigate('LaunchQueue')}
+        buttonOnPress={() => navigation.navigate('MissionsQueque')}
         additionalButton
         additionalButtonOnPress={() =>
           navigation.navigate('LaunchDetails', {

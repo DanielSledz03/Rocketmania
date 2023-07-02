@@ -1,2 +1,0 @@
-export const SET_TO_VISIBLE = 'SET_TO_VISIBLE';
-export const SET_TO_UNVISIBLE = 'SET_TO_UNVISIBLE';

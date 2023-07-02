@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BottomBar from '../BottomBar/BottomBar';
-import { IState } from '@/store/Reducers';
 import { SET_TO_DARK } from '@/store/Types/ThemeTypes';
 import { ThemeDark, ThemeLight } from '@/constants';
 import { TabNavigation_ScreenOptions } from './TabNavigation.ScreenOptions';
 import { RocketLaunchesStack, RocketLaunchesStackParamList } from '../Stacks/Launches';
-import * as actionCreators from '@/store/Actions/ThemeActions';
+import { RootState } from '@/store/store';
+import { themeSliceActions } from '@/store/theme';
 
 export type RootStackParamList = {
   RocketLaunchesStack: RocketLaunchesStackParamList;
@@ -20,12 +20,11 @@ export type RootStackParamList = {
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
 export const TabNavigation = () => {
-  const Theme = useSelector<IState>((state) => state.themeReducer.Theme);
-  const isLiveStreamModalVisible = useSelector<IState>((state) => state.youtubeModal.isVisible);
-  const liveStreamModalLink = useSelector<IState>((state) => state.youtubeModal.livestreamLink);
+  const Theme = useSelector<RootState>((state) => state.theme.theme);
+  // const isLiveStreamModalVisible = useSelector<RootState>((state) => state.youtubeModal.isVisible);
+  // const liveStreamModalLink = useSelector<RootState>((state) => state.youtubeModal.livestreamLink);
 
   const dispatch = useDispatch();
-  const { setToDark, setToLight } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     const setTheme = async () => {
@@ -34,17 +33,18 @@ export const TabNavigation = () => {
         const isFirstLaunch = await AsyncStorage.getItem('@isFirstLaunch');
 
         if (Theme === null || Theme === 'Dark') {
-          setToDark();
+          dispatch(themeSliceActions.setToDark());
         } else if (Theme === 'Light') {
           if (!isFirstLaunch) {
-            setToDark();
+            dispatch(themeSliceActions.setToDark());
+
             try {
               AsyncStorage.setItem('@isFirstLaunch', 'false');
             } catch (e) {
               console.error(e);
             }
           } else {
-            setToLight();
+            dispatch(themeSliceActions.setToLight());
           }
         }
         if (isFirstLaunch === null) {
