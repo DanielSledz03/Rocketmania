@@ -1,28 +1,33 @@
-import { useEffect, useState } from 'react';
+import { Livestream, NoLiveBroadcast, RecordOfTheBroadcast, UpcomingBroadcast } from './Broadcasts';
+import { memo, useEffect, useState } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SCREEN_HEIGHT } from '@/utils';
-import { Livestream, UpcomingBroadcast, NoLiveBroadcast, RecordOfTheBroadcast } from './Broadcasts';
+import { useDispatch, useSelector } from 'react-redux';
 import { Placeholder } from '@/components';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
+import { missionsDetailsSliceActions, RootState } from '@/store';
+import { SCREEN_HEIGHT } from '@/utils';
 
 interface Props {
   goBack: () => any;
   handleLivestreamPress: () => any;
 }
 
-export const BackButtonAndBroadcast = ({ goBack, handleLivestreamPress }: Props) => {
-  const [liveStreamStatus, setLiveStreamStatus] = useState('loading');
-  const [streamDate, setStreamDate] = useState(new Date());
-  const [streamLink, setStreamLink] = useState('');
-  let broadcast;
+export const BackButtonAndBroadcast = memo(function BackButtonAndBroadcast({
+  goBack,
+  handleLivestreamPress,
+}: Props) {
+  const [broadcast, setBroadcast] = useState<JSX.Element>();
   const livestreamLink = useSelector(
     (state: RootState) => state.missionDetails.missionDetails?.livestream,
   );
+  const livestreamStatus = useSelector((state: RootState) => state.missionDetails.livestreamStatus);
+  const livestreamDate = useSelector((state: RootState) => state.missionDetails.livestreamDate);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (livestreamLink) {
-      setStreamLink(livestreamLink);
+      dispatch(missionsDetailsSliceActions.setLivestreamStatus('loading'));
+
       fetch(
         `https://www.googleapis.com/youtube/v3/videos?part=snippet,liveStreamingDetails&id=${livestreamLink.slice(
           32,
@@ -31,40 +36,50 @@ export const BackButtonAndBroadcast = ({ goBack, handleLivestreamPress }: Props)
         .then((resp) => resp.json())
         .then((resp) => {
           if (resp.items[0].liveStreamingDetails?.scheduledStartTime !== undefined) {
-            setStreamDate(resp.items[0].liveStreamingDetails.scheduledStartTime);
+            dispatch(
+              missionsDetailsSliceActions.setLivestreamDate(
+                resp.items[0].liveStreamingDetails.scheduledStartTime,
+              ),
+            );
           }
-          setLiveStreamStatus(resp.items[0].snippet.liveBroadcastContent);
+          dispatch(
+            missionsDetailsSliceActions.setLivestreamStatus(
+              resp.items[0].snippet.liveBroadcastContent,
+            ),
+          );
         })
         .catch((err) => {
           console.error(err);
-          setLiveStreamStatus('NoLiveBroadcast');
+          dispatch(missionsDetailsSliceActions.setLivestreamStatus('NoLiveBroadcast'));
         });
     } else {
-      setLiveStreamStatus('NoLiveBroadcast');
+      dispatch(missionsDetailsSliceActions.setLivestreamStatus('NoLiveBroadcast'));
     }
   }, [livestreamLink]);
 
-  switch (liveStreamStatus) {
-    case 'loading':
-      broadcast = <Placeholder containerStyle={styles.broadcastButtonPlaceholder} />;
-      break;
+  useEffect(() => {
+    switch (livestreamStatus) {
+      case 'loading':
+        setBroadcast(<Placeholder containerStyle={styles.broadcastButtonPlaceholder} />);
+        break;
 
-    case 'upcoming':
-      broadcast = <UpcomingBroadcast streamLink={streamLink} streamDate={streamDate} />;
-      break;
+      case 'upcoming':
+        setBroadcast(<UpcomingBroadcast streamLink={livestreamLink} streamDate={livestreamDate} />);
+        break;
 
-    case 'none':
-      broadcast = <RecordOfTheBroadcast streamLink={streamLink} />;
-      break;
+      case 'none':
+        setBroadcast(<RecordOfTheBroadcast streamLink={livestreamLink} />);
+        break;
 
-    case 'live':
-      broadcast = <Livestream streamLink={streamLink} onPress={handleLivestreamPress} />;
+      case 'live':
+        setBroadcast(<Livestream streamLink={livestreamLink} onPress={handleLivestreamPress} />);
 
-      break;
+        break;
 
-    default:
-      broadcast = <NoLiveBroadcast />;
-  }
+      default:
+        setBroadcast(<NoLiveBroadcast />);
+    }
+  }, [livestreamStatus]);
 
   return (
     <View style={styles.container}>
@@ -79,7 +94,7 @@ export const BackButtonAndBroadcast = ({ goBack, handleLivestreamPress }: Props)
       {broadcast}
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

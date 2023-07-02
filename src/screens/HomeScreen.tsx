@@ -1,10 +1,10 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LaunchPreview } from '@/components/LaunchPreview/LaunchPreview';
 import { MainTemplate } from '@/components/MainTemplate/MainTemplate';
 import { SectionPreview } from '@/components/SectionPreview/SectionPreview';
 import { GET_INCOMING_LAUNCH } from '@/constants/Queries/HomePage';
 import { RocketLaunchesStackParamList } from '@/navigation/Stacks/Launches';
 import { useFetch } from '@/utils';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<
   RocketLaunchesStackParamList,

@@ -1,9 +1,9 @@
+import { Unit } from './Unit';
+import { RobotoBold } from '@components/texts';
 import { useEffect, useState } from 'react';
 import CountdownFromNPM from 'react-countdown';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { RobotoBold } from '@components/texts';
-import { Unit } from './Unit';
 
 interface Props {
   style: StyleProp<ViewStyle>;

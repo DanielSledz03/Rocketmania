@@ -1,6 +1,6 @@
+import { TabBarIcon } from '../TabBarIcon/TabBarIcon';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { StyleSheet, View } from 'react-native';
-import { TabBarIcon } from '../TabBarIcon/TabBarIcon';
 
 const BottomBar = ({ navigation }: BottomTabBarProps) => {
   const focusedScreen = navigation.getState().routeNames[navigation.getState().index];

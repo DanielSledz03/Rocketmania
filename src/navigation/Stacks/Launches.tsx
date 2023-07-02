@@ -1,15 +1,17 @@
-import { HomeScreen } from '@/screens/HomeScreen';
-import { LaunchDetail } from '@/screens/LaunchDetail';
-import { MissionsQueque } from '@/screens/MissionsQueque';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
+import { HomeScreen } from '@/screens/HomeScreen';
+import { LaunchDetail } from '@/screens/LaunchDetail';
+import { MissionsQueque } from '@/screens/MissionsQueque';
 
 export type RocketLaunchesStackParamList = {
   HomeScreen: undefined;
   LaunchDetails: { id: string };
   MissionsQueque: undefined;
+  RocketDetails: { id: string };
+  BoosterDetails: { id: string };
 };
 
 const RocketStack = createNativeStackNavigator<RocketLaunchesStackParamList>();

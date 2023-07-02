@@ -31,15 +31,7 @@ module.exports = {
     'react-native/react-native': true,
     jest: true,
   },
-  ignorePatterns: [
-    'package.js',
-    'package-lock.json',
-    '.eslintrc.js',
-    'tsconfig.json',
-    'next.config.js',
-    'next-i18next.config.js',
-    'stories/**/*',
-  ],
+  ignorePatterns: ['package.js', 'package-lock.json', '.eslintrc.js', 'tsconfig.json'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

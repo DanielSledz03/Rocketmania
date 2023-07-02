@@ -1,8 +1,8 @@
-import Countdown from 'react-countdown';
-import { Linking, View, StyleSheet, TouchableOpacity } from 'react-native';
-import { RobotoBold } from '@/components/texts';
 import { BroadcastStyle } from './BroadcastStyle';
 import { IBroadcast } from './intreface';
+import Countdown from 'react-countdown';
+import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { RobotoBold } from '@/components/texts';
 
 export const UpcomingBroadcast = ({ streamDate, streamLink = '' }: IBroadcast) => {
   return (

@@ -1,7 +1,6 @@
-import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
 import { InterfaceButton } from './interface';
 import { RobotoBold } from '../texts';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/utils';
 
 export const ButtonPrimary = ({

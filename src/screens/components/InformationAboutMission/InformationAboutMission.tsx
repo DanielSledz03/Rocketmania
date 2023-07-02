@@ -1,54 +1,66 @@
 import { useNavigation } from '@react-navigation/native';
-import { AnimatedView, TextWithExpandButton, VehiclePreview } from 'components';
-import { View, StyleSheet, Alert } from 'react-native';
-import { ILaunchData } from 'src/Types/LaunchInterface';
-import { RobotoBold } from 'texts';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { AnimatedView, VehiclePreview } from '@/components';
+import { RobotoBold } from '@/components/texts';
+import { TextWithExpandButton } from '@/components/texts/TextWithExpandButton/TextWithExpandButton';
+import { RocketLaunchesStackParamList } from '@/navigation/Stacks/Launches';
+import { RootState } from '@/store';
 
-export const InformationAboutMission = ({ attributes }: ILaunchData) => {
-  const navigation = useNavigation();
+export type LaunchDetailsNavigationProp = NativeStackNavigationProp<
+  RocketLaunchesStackParamList,
+  'LaunchDetails'
+>;
+
+export const InformationAboutMission = () => {
+  const navigation = useNavigation<LaunchDetailsNavigationProp>();
+  const missionDetails = useSelector((state: RootState) => state.missionDetails.missionDetails);
+  console.log(missionDetails?.rocket.image.asset.url);
   return (
     <>
       <AnimatedView>
-        {attributes.Description && (
+        {missionDetails?.description && (
           <>
             <RobotoBold>INFORMACJE O MISJI</RobotoBold>
-            <TextWithExpandButton>
-              {attributes.Description}
-            </TextWithExpandButton>
+            <TextWithExpandButton>{missionDetails.description}</TextWithExpandButton>
           </>
         )}
         <View style={styles.vehiclesPreviewContainer}>
-          <VehiclePreview
-            name={attributes.Rocket.data.attributes.Name}
-            title="Rakieta"
-            url={{
-              uri: attributes.Rocket.data.attributes.MainImage.data.attributes
-                .url,
-            }}
-            buttonTitle="Szczegóły rakiety »"
-            onPress={() =>
-              navigation.navigate('RocketDetails', {
-                id: attributes.Rocket.data.id,
-              })
-            }
-          />
-
-          {attributes.Boosters.data[0] && (
+          {missionDetails && (
             <VehiclePreview
+              name={missionDetails?.rocket.name}
+              title='Rakieta'
               url={{
-                uri: attributes.Boosters.data[0].attributes.Photo.data
-                  .attributes.url,
+                uri: missionDetails?.rocket.image.asset.url,
               }}
-              name={attributes.Boosters.data[0].attributes.Name}
-              buttonTitle="Szczegóły Boostera »"
-              title="Wykorzystywany Booster"
-              onPress={() => {
-                navigation.navigate('BoosterDetails', {
-                  id: attributes.Boosters.data[0].attributes.id,
-                });
-              }}
+              buttonTitle='Szczegóły rakiety »'
+              onPress={() =>
+                navigation.navigate('RocketDetails', {
+                  id: missionDetails?.rocket._id,
+                })
+              }
             />
           )}
+
+          {missionDetails?.boosters &&
+            missionDetails?.boosters?.length > 0 &&
+            missionDetails?.boosters.map((booster) => (
+              <VehiclePreview
+                key={booster._id}
+                url={{
+                  uri: booster.image?.asset.url,
+                }}
+                name={booster.name}
+                buttonTitle='Szczegóły Boostera »'
+                title='Wykorzystywany Booster'
+                onPress={() => {
+                  navigation.navigate('BoosterDetails', {
+                    id: booster._id,
+                  });
+                }}
+              />
+            ))}
         </View>
       </AnimatedView>
     </>

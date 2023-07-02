@@ -1,6 +1,6 @@
-import { View, StyleSheet } from 'react-native';
-import { moderateScale } from 'react-native-size-matters';
 import { RobotoBold, RobotoLight } from '@components/texts';
+import { StyleSheet, View } from 'react-native';
+import { moderateScale } from 'react-native-size-matters';
 
 interface Props {
   value: number;

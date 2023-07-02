@@ -1,5 +1,5 @@
 export interface IBroadcast {
-  streamDate?: Date;
+  streamDate?: string;
   streamLink?: string;
   onPress?: () => any;
 }

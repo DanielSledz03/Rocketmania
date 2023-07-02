@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
+import missionDetailsReducer from './missionDetails';
+import missionsFiltersReducer from './missionsFilters';
 import missionsSearchReducer from './missionsSearch';
 import themeReducer from './theme';
-import missionsFiltersReducer from './missionsFilters';
 import youtubeModalReducer from './youtubeModal';
-import missionDetailsReducer from './missionDetails';
+import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore({
   reducer: {

@@ -1,5 +1,5 @@
 import { AnimatedImage, ButtonExpand, PropertiesList } from 'components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LayoutAnimation, StyleSheet, View } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 import { RobotoBold, RobotoMedium } from 'texts';
@@ -35,7 +35,7 @@ export const Payload = ({ payload }: IProps) => {
       {payload.Photo?.data?.attributes && expanded && (
         <AnimatedImage
           style={styles.payloadPhoto}
-          resizeMode="cover"
+          resizeMode='cover'
           source={{
             uri: payload.Photo.data.attributes.url,
           }}
@@ -43,17 +43,13 @@ export const Payload = ({ payload }: IProps) => {
       )}
       <View
         style={{
-          height: LayoutAnimation.configureNext(
-            LayoutAnimation.Presets.easeInEaseOut,
-          ),
+          height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
         }}
       >
         {expanded && (
           <>
             <PropertiesList list={payload.Specification?.split('\n')} />
-            <RobotoMedium style={styles.description}>
-              {payload.Description}
-            </RobotoMedium>
+            <RobotoMedium style={styles.description}>{payload.Description}</RobotoMedium>
           </>
         )}
       </View>

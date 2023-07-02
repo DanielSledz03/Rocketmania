@@ -1,7 +1,7 @@
-import { AnimatedView } from '@/components';
-import { Image, View, StyleSheet } from 'react-native';
-import { RobotoBold } from '@/components/texts';
 import { BroadcastStyle } from './BroadcastStyle';
+import { Image, StyleSheet, View } from 'react-native';
+import { AnimatedView } from '@/components';
+import { RobotoBold } from '@/components/texts';
 
 export const NoLiveBroadcast = () => {
   return (

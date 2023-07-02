@@ -1,5 +1,5 @@
 // import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 // import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 

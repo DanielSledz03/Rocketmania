@@ -1,7 +1,7 @@
-import { RobotoRegular } from '@/components/texts';
 import { memo } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { RobotoRegular } from '@/components/texts';
 
 interface IProps {
   title: string;

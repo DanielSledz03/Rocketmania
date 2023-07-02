@@ -1,11 +1,11 @@
-import { LayoutAnimation, StyleSheet, View } from 'react-native';
-import { RobotoRegular } from '@components/texts';
 import { SelectOption } from './components/SelectOption';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
-import { missionsFiltersSliceActions } from '@/store/missionsFilters';
-import { ALL, SPACEX, ESA, ULA, ROSCOSMOS, ROCKET_LAB, NASA } from '@/store/Types/AgencyNames';
+import { RobotoRegular } from '@components/texts';
 import { memo } from 'react';
+import { LayoutAnimation, StyleSheet, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { missionsFiltersSliceActions } from '@/store/missionsFilters';
+import { RootState } from '@/store/store';
+import { ALL, ESA, NASA, ROCKET_LAB, ROSCOSMOS, SPACEX, ULA } from '@/store/Types/AgencyNames';
 
 export const FilterByAgency = memo(function FilterByAgency() {
   const dispatch = useDispatch();

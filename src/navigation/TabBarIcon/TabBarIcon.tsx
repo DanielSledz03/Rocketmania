@@ -1,7 +1,7 @@
-import { Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { RobotoBold } from '@components/texts';
 import { IconTemplateProps, TabBarIconProps } from './interface';
+import { RobotoBold } from '@components/texts';
 import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 const IconTemplate = ({ icon, title, focused, stackName }: IconTemplateProps) => {

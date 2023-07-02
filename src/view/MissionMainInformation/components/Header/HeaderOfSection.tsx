@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
-import { CountdownWithStatus, AnimatedView, Placeholder } from '@/components';
-import { RobotoBold, RobotoMedium } from '@components/texts';
-import { SCREEN_HEIGHT } from '@/utils';
 import { HeaderOfSectionPlaceholderLayout } from './LayoutPlaceholder';
+import { RobotoBold, RobotoMedium } from '@components/texts';
+import { StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
+import { AnimatedView, CountdownWithStatus, Placeholder } from '@/components';
 import { RootState } from '@/store';
+import { SCREEN_HEIGHT } from '@/utils';
 
 export const HeaderOfSection = () => {
   const missionDetails = useSelector((state: RootState) => state.missionDetails.missionDetails);

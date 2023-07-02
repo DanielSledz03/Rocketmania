@@ -1,4 +1,4 @@
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@/utils';
+import { SCREEN_HEIGHT } from '@/utils';
 export const HeaderOfSectionPlaceholderLayout = [
   {
     key: '1',

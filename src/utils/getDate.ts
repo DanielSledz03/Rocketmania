@@ -26,9 +26,7 @@ export function getDate(LaunchDate: Date, status: string) {
           ':' +
           (minutes < 10 ? '0' + minutes : minutes) +
           ' UTC' +
-          (timezoneOffset * -1 !== 0
-            ? (timezoneOffset < 0 ? '+' : '-') + timezoneOffset * -1
-            : ''),
+          (timezoneOffset * -1 !== 0 ? (timezoneOffset < 0 ? '+' : '-') + timezoneOffset * -1 : ''),
         color: 'rgba(255, 0, 0, 1)',
       };
   }

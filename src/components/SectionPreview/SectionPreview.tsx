@@ -1,9 +1,9 @@
+import { SectionPreviewProps } from './interface';
+import { ButtonPrimary } from '../Buttons/PrimaryButton';
+import { Placeholder } from '../Placeholder/Placeholder';
+import { RobotoBold, RobotoLight, RobotoMedium, RobotoRegular } from '@components/texts';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { RobotoBold, RobotoLight, RobotoMedium, RobotoRegular } from '@components/texts';
-import { SectionPreviewProps } from './interface';
-import { Placeholder } from '../Placeholder/Placeholder';
-import { ButtonPrimary } from '../Buttons/PrimaryButton';
 import { SCREEN_HEIGHT } from '@/utils';
 
 export const SectionPreview = (props: SectionPreviewProps) => {

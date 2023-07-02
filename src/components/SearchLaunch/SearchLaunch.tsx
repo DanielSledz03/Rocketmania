@@ -1,4 +1,6 @@
+import { RobotoRegular } from '@components/texts';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { memo, useMemo } from 'react';
 import {
   Image,
@@ -8,14 +10,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { RobotoRegular } from '@components/texts';
-import { Mission } from '@/types/mission';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RocketLaunchesStackParamList } from '@/navigation/Stacks/Launches';
 import Animated from 'react-native-reanimated';
 import { useDispatch, useSelector } from 'react-redux';
+import { RocketLaunchesStackParamList } from '@/navigation/Stacks/Launches';
 import { missionsSearchSliceActions } from '@/store/missionsSearch';
 import { RootState } from '@/store/store';
+import { Mission } from '@/types/mission';
 
 export type MissionQuequeNavigationProp = NativeStackNavigationProp<
   RocketLaunchesStackParamList,

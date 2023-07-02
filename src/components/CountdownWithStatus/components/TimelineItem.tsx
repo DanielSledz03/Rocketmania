@@ -1,5 +1,5 @@
-import { StyleSheet, View } from 'react-native';
 import { RobotoMedium } from '@components/texts';
+import { StyleSheet, View } from 'react-native';
 
 interface Props {
   date: string;

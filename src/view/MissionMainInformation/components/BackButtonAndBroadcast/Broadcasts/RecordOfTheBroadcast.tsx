@@ -1,7 +1,7 @@
-import { Image, View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
-import { RobotoBold } from '@/components/texts';
 import { BroadcastStyle } from './BroadcastStyle';
 import { IBroadcast } from './intreface';
+import { Image, Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { RobotoBold } from '@/components/texts';
 
 export const RecordOfTheBroadcast = ({ streamLink = '' }: IBroadcast) => {
   return (

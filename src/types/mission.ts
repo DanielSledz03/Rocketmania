@@ -1,3 +1,4 @@
+import { Booster } from './booster';
 import { Image } from './image';
 import { Rocket } from './rocket';
 
@@ -15,4 +16,5 @@ export interface Mission {
   patch?: Image;
   rocket: Rocket;
   _id: string;
+  boosters: Booster[];
 }

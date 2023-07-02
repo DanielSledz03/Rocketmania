@@ -1,16 +1,14 @@
-import { View, StyleSheet, Image, StyleProp, ViewStyle } from 'react-native';
-import { moderateScale } from 'react-native-size-matters';
-import { RobotoBold, RobotoRegular } from '@components/texts';
-import { CountdownWithStatus } from '../CountdownWithStatus/CountdownWithStatus';
-import { SCREEN_HEIGHT, useFetch } from '@/utils';
-import { LaunchPreviewPlaceholderLayout } from '../LaunchPreviewPlaceholder/Layout';
-import { ButtonPrimary } from '../Buttons/PrimaryButton';
-import { AnimatedView } from '../AnimatedView/AnimatedView';
 import { AnimatedImage } from '../AnimatedImage/AnimatedImage';
+import { AnimatedView } from '../AnimatedView/AnimatedView';
+import { ButtonPrimary } from '../Buttons/PrimaryButton';
+import { CountdownWithStatus } from '../CountdownWithStatus/CountdownWithStatus';
 import { LaunchPreviewPlaceholder } from '../LaunchPreviewPlaceholder/LaunchPreviewPlaceholder';
+import { RobotoBold, RobotoRegular } from '@components/texts';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { moderateScale } from 'react-native-size-matters';
 import { Mission } from '@/types/mission';
-import { getFirstLaunch } from '@/constants/Queries/HomePage';
+import { SCREEN_HEIGHT } from '@/utils';
 
 interface Props {
   containerStyle?: StyleProp<ViewStyle>;

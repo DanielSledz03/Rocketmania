@@ -1,5 +1,5 @@
-import { Mission } from '@/types/mission';
 import { createSlice } from '@reduxjs/toolkit';
+import { Mission } from '@/types/mission';
 
 export interface missionsSearchState {
   inputValue: string;

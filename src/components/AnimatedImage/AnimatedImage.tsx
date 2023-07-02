@@ -1,15 +1,15 @@
+import { Placeholder } from '../Placeholder/Placeholder';
+import { RobotoLight, RobotoRegular } from '../texts';
 import { useState } from 'react';
 import {
-  View,
-  TouchableOpacity,
   Alert,
-  StyleSheet,
   Image,
   ImageResizeMode,
   ImageStyle,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { RobotoLight, RobotoRegular } from '../texts';
-import { Placeholder } from '../Placeholder/Placeholder';
 
 interface Props {
   style: ImageStyle;

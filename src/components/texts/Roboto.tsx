@@ -1,7 +1,7 @@
+import { TextProps } from './interface';
 import { useTheme } from '@react-navigation/native';
 import { Text } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { TextProps } from './interface';
 
 const RobotoThin = ({ children, style }: TextProps) => {
   const { colors } = useTheme();

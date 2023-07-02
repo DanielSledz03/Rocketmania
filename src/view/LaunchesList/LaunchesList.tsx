@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
-import { Image, StyleSheet, View } from 'react-native';
-import { HomeScreenNavigationProp } from '@/screens/HomeScreen';
-import { LaunchPreview } from '@/components/LaunchPreview/LaunchPreview';
-import { SCREEN_HEIGHT } from '@/utils';
-import { Mission } from '@/types/mission';
 import { memo, useMemo } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { LaunchPreview } from '@/components/LaunchPreview/LaunchPreview';
+import { HomeScreenNavigationProp } from '@/screens/HomeScreen';
+import { Mission } from '@/types/mission';
+import { SCREEN_HEIGHT } from '@/utils';
 
 export const LaunchesList = memo(function LaunchesList({ missions }: { missions: Mission[] }) {
   const navigation = useNavigation<HomeScreenNavigationProp>();

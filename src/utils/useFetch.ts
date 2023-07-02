@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
-import {
-  useQuery,
-  QueryHookOptions,
-  DocumentNode,
-  QueryResult,
-  ApolloError,
-} from '@apollo/client';
+import { ApolloError, DocumentNode, QueryHookOptions, QueryResult, useQuery } from '@apollo/client';
+import { useState } from 'react';
 
 export const useFetch = (
   query: DocumentNode,

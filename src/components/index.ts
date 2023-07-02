@@ -14,3 +14,4 @@ export * from './MainTemplate/MainTemplate';
 export * from './SearchLaunch/SearchLaunch';
 export * from './SectionPreview/SectionPreview';
 export * from './texts/Roboto';
+export * from './VehiclePreview/VehiclePreview';

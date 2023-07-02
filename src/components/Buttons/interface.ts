@@ -1,4 +1,4 @@
-import { TextStyle, ViewStyle, StyleProp } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 /**
  * text: text displayed by button
@@ -11,5 +11,5 @@ export interface InterfaceButton {
   disabled?: boolean;
   onPress?: () => void;
   containerStyle?: StyleProp<ViewStyle>;
-  titleStyle?: StyleProp<TextStyle> | {};
+  titleStyle?: StyleProp<TextStyle> | object;
 }

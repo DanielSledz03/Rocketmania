@@ -1,23 +1,23 @@
+import { MainTemplateProps } from './MainTemplate.Interface';
+import { AnimatedView } from '../AnimatedView/AnimatedView';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import LottieView from 'lottie-react-native';
 import { useCallback, useRef } from 'react';
 import {
-  View,
-  StyleSheet,
-  ScrollView,
-  RefreshControl,
-  TouchableOpacity,
-  Image,
   Animated,
   Easing,
+  Image,
   Platform,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import LottieView from 'lottie-react-native';
-import { MainTemplateProps } from './MainTemplate.Interface';
-import { useNavigation } from '@react-navigation/native';
-import { AnimatedView } from '../AnimatedView/AnimatedView';
-import { SCREEN_HEIGHT, isCloseToBottom } from '@/utils';
 import FastImage from 'react-native-fast-image';
 import { RocketLaunchesStackParamList } from '@/navigation/Stacks/Launches';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { isCloseToBottom, SCREEN_HEIGHT } from '@/utils';
 
 type MainTemplateNav = NativeStackNavigationProp<RocketLaunchesStackParamList>;
 

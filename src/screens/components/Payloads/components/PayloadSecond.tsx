@@ -1,11 +1,6 @@
 import { AnimatedView, PropertiesList } from 'components';
-import React, { useState } from 'react';
-import {
-  TouchableOpacity,
-  LayoutAnimation,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { useState } from 'react';
+import { Image, LayoutAnimation, StyleSheet, TouchableOpacity } from 'react-native';
 import { RobotoLight, RobotoMedium } from 'texts';
 import { SCREEN_HEIGHT } from 'utils';
 
@@ -42,10 +37,7 @@ export const PayloadSecond = ({ payload, index }: IProps) => {
           style={[
             styles.payloadName,
             {
-              color:
-                payload.Description == null
-                  ? 'rgba(109, 109, 109, 1)'
-                  : 'white',
+              color: payload.Description == null ? 'rgba(109, 109, 109, 1)' : 'white',
             },
           ]}
         >
@@ -53,7 +45,7 @@ export const PayloadSecond = ({ payload, index }: IProps) => {
         </RobotoLight>
         {payload.Specification && (
           <Image
-            resizeMode="contain"
+            resizeMode='contain'
             source={
               !expanded
                 ? require('images/expand/expand.png')
@@ -67,9 +59,7 @@ export const PayloadSecond = ({ payload, index }: IProps) => {
       <>
         <AnimatedView
           style={{
-            height: LayoutAnimation.configureNext(
-              LayoutAnimation.Presets.easeInEaseOut,
-            ),
+            height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
             marginBottom: expanded ? 20 : 10,
           }}
         >
@@ -78,7 +68,7 @@ export const PayloadSecond = ({ payload, index }: IProps) => {
               {payload.Photo?.data?.attributes && (
                 <Image
                   style={styles.payloadPhoto}
-                  resizeMode="cover"
+                  resizeMode='cover'
                   source={{
                     uri: payload.Photo?.data?.attributes?.url,
                   }}
@@ -89,9 +79,7 @@ export const PayloadSecond = ({ payload, index }: IProps) => {
                 <PropertiesList list={payload.Specification.split('\n')} />
               )}
 
-              <RobotoMedium style={styles.payloadDescription}>
-                {payload.Description}
-              </RobotoMedium>
+              <RobotoMedium style={styles.payloadDescription}>{payload.Description}</RobotoMedium>
             </>
           )}
         </AnimatedView>

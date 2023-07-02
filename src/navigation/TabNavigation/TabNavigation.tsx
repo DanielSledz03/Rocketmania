@@ -1,16 +1,15 @@
-import { useEffect } from 'react';
+import { TabNavigation_ScreenOptions } from './TabNavigation.ScreenOptions';
+import BottomBar from '../BottomBar/BottomBar';
+import { RocketLaunchesStack, RocketLaunchesStackParamList } from '../Stacks/Launches';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import BottomBar from '../BottomBar/BottomBar';
-import { SET_TO_DARK } from '@/store/Types/ThemeTypes';
 import { ThemeDark, ThemeLight } from '@/constants';
-import { TabNavigation_ScreenOptions } from './TabNavigation.ScreenOptions';
-import { RocketLaunchesStack, RocketLaunchesStackParamList } from '../Stacks/Launches';
 import { RootState } from '@/store/store';
 import { themeSliceActions } from '@/store/theme';
+import { SET_TO_DARK } from '@/store/Types/ThemeTypes';
 
 export type RootStackParamList = {
   RocketLaunchesStack: RocketLaunchesStackParamList;

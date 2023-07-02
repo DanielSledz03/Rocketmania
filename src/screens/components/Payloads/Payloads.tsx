@@ -1,8 +1,8 @@
-import { StyleSheet, View } from 'react-native';
-import { ILaunchData } from 'src/Types/LaunchInterface';
-import { RobotoBold } from 'texts';
 import { Payload } from './components/Payload';
 import { PayloadSecond } from './components/PayloadSecond';
+import { ILaunchData } from 'src/Types/LaunchInterface';
+import { StyleSheet, View } from 'react-native';
+import { RobotoBold } from 'texts';
 
 export const Payloads = ({ attributes }: ILaunchData) => {
   return (
@@ -13,12 +13,7 @@ export const Payloads = ({ attributes }: ILaunchData) => {
           <View style={styles.payloadsContainer}>
             {attributes.Payloads.data.length < 4
               ? attributes.Payloads.data.map((payload) => {
-                  return (
-                    <Payload
-                      key={payload.attributes.Name}
-                      payload={payload.attributes}
-                    />
-                  );
+                  return <Payload key={payload.attributes.Name} payload={payload.attributes} />;
                 })
               : attributes.Payloads.data
                   .sort((a: any) => {

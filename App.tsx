@@ -1,9 +1,9 @@
-import { TabNavigation } from '@/navigation/TabNavigation/TabNavigation';
-import { Provider } from 'react-redux';
-import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { useEffect } from 'react';
 import { Platform, UIManager } from 'react-native';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import { Provider } from 'react-redux';
+import { TabNavigation } from '@/navigation/TabNavigation/TabNavigation';
 import store from '@/store/store';
 
 const client = new ApolloClient({

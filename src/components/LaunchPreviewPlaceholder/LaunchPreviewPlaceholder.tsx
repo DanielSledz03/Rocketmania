@@ -1,7 +1,6 @@
-import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { LaunchPreviewPlaceholderLayout } from './Layout';
-import React from 'react';
 import { Placeholder } from '../Placeholder/Placeholder';
+import { Image, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 interface Props {
   containerStyle: StyleProp<ViewStyle>;

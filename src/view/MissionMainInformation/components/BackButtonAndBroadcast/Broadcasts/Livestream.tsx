@@ -1,7 +1,7 @@
-import { Image, View, TouchableOpacity } from 'react-native';
-import { RobotoBold } from '@/components/texts';
 import { BroadcastStyle } from './BroadcastStyle';
 import { IBroadcast } from './intreface';
+import { Image, TouchableOpacity, View } from 'react-native';
+import { RobotoBold } from '@/components/texts';
 
 export const Livestream = ({ onPress }: IBroadcast) => {
   return (

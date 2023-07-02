@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { FilterByAgency, MainTemplate, RobotoBold, SearchLaunch } from '@/components';
+import { GET_ALL_LAUNCHES } from '@/constants/Queries/HomePage';
+import { missionsFiltersSliceActions, missionsSearchSliceActions, RootState } from '@/store';
+import { ALL } from '@/store/Types';
 import { useFetch } from '@/utils';
 import { LaunchesList } from '@/view';
-import { FilterByAgency, MainTemplate, RobotoBold, SearchLaunch } from '@/components';
-import { RootState, missionsFiltersSliceActions, missionsSearchSliceActions } from '@/store';
-import { GET_ALL_LAUNCHES } from '@/constants/Queries/HomePage';
-import { ALL } from '@/store/Types';
 
 export const MissionsQueque = () => {
   const dispatch = useDispatch();

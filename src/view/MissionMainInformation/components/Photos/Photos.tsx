@@ -1,7 +1,7 @@
-import { AnimatedImage, AnimatedView } from '@/components';
-import { Image, StyleSheet } from 'react-native';
 import { PhotosPlaceholder } from './PhotosPlaceholder';
+import { Image, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
+import { AnimatedImage, AnimatedView } from '@/components';
 import { RootState } from '@/store';
 
 export const Photos = () => {

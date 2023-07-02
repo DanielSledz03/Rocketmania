@@ -1,3 +1,6 @@
+import { Countdown } from './components/Countdown';
+import { TimeLineItem } from './components/TimelineItem';
+import { RobotoLight, RobotoMedium, SpaceGroteskBold } from '@components/texts';
 import { useState } from 'react';
 import {
   Animated,
@@ -10,10 +13,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { RobotoLight, RobotoMedium, SpaceGroteskBold } from '@components/texts';
-import { Countdown } from './components/Countdown';
-import { TimeLineItem } from './components/TimelineItem';
-import { StatusProps, getDate } from '@/utils';
+import { getDate, StatusProps } from '@/utils';
 
 interface Props {
   date: string;

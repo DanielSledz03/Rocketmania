@@ -1,7 +1,7 @@
+import { RobotoLight } from '../texts';
 import React from 'react';
 import { Image, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { RobotoLight } from '../texts';
 import { SCREEN_HEIGHT } from '@/utils';
 
 interface IProps {

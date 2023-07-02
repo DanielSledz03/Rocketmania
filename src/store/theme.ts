@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { SET_TO_DARK, SET_TO_LIGHT } from './Types/ThemeTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface themeState {
   theme: string;
