@@ -16,6 +16,8 @@ export const Property = ({ name, value, isLast = false }: IProps) => {
     };
   };
 
+  console.log(name, value);
+
   return (
     <View style={[styles.container, border()]}>
       <View style={styles.box}>

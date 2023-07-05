@@ -8,8 +8,9 @@ import { translateDate } from '@/utils';
 import { PropertiesList } from '@/view';
 
 export const MissionDetails = () => {
-  const missionDetails = useSelector((state: RootState) => state.missionDetails.missionDetails);
   const [expanded, setExpanded] = useState(false);
+  const missionDetails = useSelector((state: RootState) => state.missionDetails.missionDetails);
+
   return (
     <>
       <RobotoBold>SZCZEGÓŁY MISJI</RobotoBold>

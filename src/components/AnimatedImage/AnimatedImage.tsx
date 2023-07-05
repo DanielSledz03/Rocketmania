@@ -1,20 +1,13 @@
 import { Placeholder } from '../Placeholder/Placeholder';
 import { RobotoLight, RobotoRegular } from '../texts';
 import { useState } from 'react';
-import {
-  Alert,
-  Image,
-  ImageResizeMode,
-  ImageStyle,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Alert, ImageStyle, StyleSheet, TouchableOpacity, View } from 'react-native';
+import FastImage, { ResizeMode } from 'react-native-fast-image';
 
 interface Props {
   style: ImageStyle;
   source: any;
-  resizeMode?: ImageResizeMode;
+  resizeMode?: ResizeMode;
   credits?: string;
 }
 
@@ -36,7 +29,7 @@ export const AnimatedImage = ({ style, source, resizeMode, credits = '' }: Props
         activeOpacity={1}
         style={styles.screen}
       >
-        <Image
+        <FastImage
           style={styles.image}
           source={
             source?.uri
@@ -48,9 +41,7 @@ export const AnimatedImage = ({ style, source, resizeMode, credits = '' }: Props
           onLoadEnd={() => {
             setIsLoaded(true);
           }}
-          onError={({ nativeEvent }) => {
-            console.error(nativeEvent);
-
+          onError={() => {
             setError(true);
           }}
           resizeMode={resizeMode}

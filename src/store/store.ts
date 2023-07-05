@@ -4,6 +4,7 @@ import missionsSearchReducer from './missionsSearch';
 import themeReducer from './theme';
 import youtubeModalReducer from './youtubeModal';
 import { configureStore } from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     youtubeModal: youtubeModalReducer,
     missionDetails: missionDetailsReducer,
   },
+  middleware: [thunk],
 });
 
 export type RootState = ReturnType<typeof store.getState>;

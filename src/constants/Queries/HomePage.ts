@@ -11,9 +11,11 @@ export const GET_INCOMING_LAUNCH = gql(`
     date
     status
     rocket {
+      _id
       name
       image {
         asset {
+          _id
           url
         }
       }
@@ -31,9 +33,11 @@ export const GET_ALL_LAUNCHES = gql(`
     date
     status
     rocket {
+      _id
       name
       image {
         asset {
+          _id
           url
         }
       }
@@ -62,12 +66,14 @@ query getMissionByID($id: ID) {
     windowStart
     patch {
       asset {
+        _id
         url
       }
     }
     archived
     probability
     landingPad {
+   
       boosterName
       landingPad
     }
@@ -77,6 +83,7 @@ query getMissionByID($id: ID) {
       name
       image {
         asset {
+          _id
           url
         }
       }
@@ -89,6 +96,7 @@ query getMissionByID($id: ID) {
       description
       image {
         asset {
+          _id
           url
         }
       }
@@ -100,6 +108,7 @@ query getMissionByID($id: ID) {
       name
       image {
         asset {
+          _id
           url
         }
       }

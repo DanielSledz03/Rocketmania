@@ -1,4 +1,9 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloProvider,
+  defaultDataIdFromObject,
+  InMemoryCache,
+} from '@apollo/client';
 import { useEffect } from 'react';
 import { Platform, UIManager } from 'react-native';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
@@ -8,7 +13,18 @@ import store from '@/store/store';
 
 const client = new ApolloClient({
   uri: 'https://voux0k38.api.sanity.io/v1/graphql/production/default',
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    dataIdFromObject(responseObject) {
+      switch (responseObject.__typename) {
+        case 'Rocket':
+          return `Rocket:${responseObject._id}`;
+        case 'Mission':
+          return `Mission:${responseObject._id}`;
+        default:
+          return defaultDataIdFromObject(responseObject);
+      }
+    },
+  }),
 });
 
 if (Platform.OS === 'android') {
