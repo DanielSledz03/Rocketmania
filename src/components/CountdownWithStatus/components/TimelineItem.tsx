@@ -26,7 +26,7 @@ export const TimeLineItem = ({ date, text, isLast = false }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 80,
+    height: 50,
     position: 'relative',
     flexDirection: 'row',
   },

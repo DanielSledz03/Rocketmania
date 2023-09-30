@@ -1,89 +1,49 @@
 import { Livestream, NoLiveBroadcast, RecordOfTheBroadcast, UpcomingBroadcast } from './Broadcasts';
 import { memo, useEffect, useState } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import { useDispatch, useSelector } from 'react-redux';
 import { Placeholder } from '@/components';
 import { missionsDetailsSliceActions, RootState } from '@/store';
 import { SCREEN_HEIGHT } from '@/utils';
 
-interface Props {
-  goBack: () => any;
-  handleLivestreamPress: () => any;
+interface BackButtonAndBroadcastProps {
+  navigateBack: () => void;
+  handleLivestreamClick: () => void;
 }
 
 export const BackButtonAndBroadcast = memo(function BackButtonAndBroadcast({
-  goBack,
-  handleLivestreamPress,
-}: Props) {
-  const [broadcast, setBroadcast] = useState<JSX.Element>();
-  const livestreamLink = useSelector(
+  navigateBack,
+  handleLivestreamClick,
+}: BackButtonAndBroadcastProps) {
+  const [broadcastElement, setBroadcastElement] = useState<JSX.Element>();
+  const livestreamUrl = useSelector(
     (state: RootState) => state.missionDetails.missionDetails?.livestream,
   );
   const livestreamStatus = useSelector((state: RootState) => state.missionDetails.livestreamStatus);
-  const livestreamDate = useSelector((state: RootState) => state.missionDetails.livestreamDate);
+  const livestreamScheduledDate = useSelector(
+    (state: RootState) => state.missionDetails.livestreamDate,
+  );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (livestreamLink) {
-      dispatch(missionsDetailsSliceActions.setLivestreamStatus('loading'));
-
-      fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet,liveStreamingDetails&id=${livestreamLink.slice(
-          32,
-        )}&key=AIzaSyBgfoTlMxtExkw5Hvlxq_e413EvV-sg9n8`,
-      )
-        .then((resp) => resp.json())
-        .then((resp) => {
-          if (resp.items[0].liveStreamingDetails?.scheduledStartTime !== undefined) {
-            dispatch(
-              missionsDetailsSliceActions.setLivestreamDate(
-                resp.items[0].liveStreamingDetails.scheduledStartTime,
-              ),
-            );
-          }
-          dispatch(
-            missionsDetailsSliceActions.setLivestreamStatus(
-              resp.items[0].snippet.liveBroadcastContent,
-            ),
-          );
-        })
-        .catch((err) => {
-          console.error(err);
-          dispatch(missionsDetailsSliceActions.setLivestreamStatus('NoLiveBroadcast'));
-        });
-    } else {
-      dispatch(missionsDetailsSliceActions.setLivestreamStatus('NoLiveBroadcast'));
-    }
-  }, [livestreamLink]);
+    fetchLivestreamData(livestreamUrl, dispatch);
+  }, [livestreamUrl, dispatch]);
 
   useEffect(() => {
-    switch (livestreamStatus) {
-      case 'loading':
-        setBroadcast(<Placeholder containerStyle={styles.broadcastButtonPlaceholder} />);
-        break;
-
-      case 'upcoming':
-        setBroadcast(<UpcomingBroadcast streamLink={livestreamLink} streamDate={livestreamDate} />);
-        break;
-
-      case 'none':
-        setBroadcast(<RecordOfTheBroadcast streamLink={livestreamLink} />);
-        break;
-
-      case 'live':
-        setBroadcast(<Livestream streamLink={livestreamLink} onPress={handleLivestreamPress} />);
-
-        break;
-
-      default:
-        setBroadcast(<NoLiveBroadcast />);
-    }
-  }, [livestreamStatus]);
+    setBroadcastElementBasedOnStatus(
+      livestreamStatus,
+      setBroadcastElement,
+      livestreamUrl,
+      livestreamScheduledDate,
+      handleLivestreamClick,
+    );
+  }, [livestreamStatus, livestreamUrl, livestreamScheduledDate, handleLivestreamClick]);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => goBack()} style={styles.goBackContainer}>
+      <TouchableOpacity onPress={navigateBack} style={styles.goBackContainer}>
         <Image
           source={require('@/assets/images/back.png')}
           resizeMode='contain'
@@ -91,10 +51,82 @@ export const BackButtonAndBroadcast = memo(function BackButtonAndBroadcast({
         />
       </TouchableOpacity>
 
-      {broadcast}
+      {broadcastElement}
     </View>
   );
 });
+
+async function fetchLivestreamData(livestreamUrl: string | undefined, dispatch: any) {
+  if (livestreamUrl) {
+    dispatch(missionsDetailsSliceActions.setLivestreamStatus('loading'));
+
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet,liveStreamingDetails&id=${livestreamUrl.slice(
+          32,
+        )}&key=AIzaSyBgfoTlMxtExkw5Hvlxq_e413EvV-sg9n8`,
+      );
+      const data = await response.json();
+
+      if (data.items[0].liveStreamingDetails?.scheduledStartTime !== undefined) {
+        dispatch(
+          missionsDetailsSliceActions.setLivestreamDate(
+            data.items[0].liveStreamingDetails.scheduledStartTime,
+          ),
+        );
+      }
+      dispatch(
+        missionsDetailsSliceActions.setLivestreamStatus(data.items[0].snippet.liveBroadcastContent),
+      );
+    } catch (error) {
+      console.error(error);
+      dispatch(missionsDetailsSliceActions.setLivestreamStatus('NoLiveBroadcast'));
+    }
+  } else {
+    dispatch(missionsDetailsSliceActions.setLivestreamStatus('NoLiveBroadcast'));
+  }
+}
+
+function setBroadcastElementBasedOnStatus(
+  livestreamStatus: string,
+  setBroadcastElement: any,
+  livestreamUrl: string | undefined,
+  livestreamScheduledDate: string | undefined,
+  handleLivestreamClick: () => void,
+) {
+  switch (livestreamStatus) {
+    case 'loading':
+      setBroadcastElement(
+        <Placeholder>
+          <SkeletonPlaceholder.Item
+            borderRadius={5}
+            height={35}
+            width={200}
+          ></SkeletonPlaceholder.Item>
+        </Placeholder>,
+      );
+      break;
+
+    case 'upcoming':
+      setBroadcastElement(
+        <UpcomingBroadcast streamLink={livestreamUrl} streamDate={livestreamScheduledDate} />,
+      );
+      break;
+
+    case 'none':
+      setBroadcastElement(<RecordOfTheBroadcast streamLink={livestreamUrl} />);
+      break;
+
+    case 'live':
+      setBroadcastElement(
+        <Livestream streamLink={livestreamUrl} onPress={handleLivestreamClick} />,
+      );
+      break;
+
+    default:
+      setBroadcastElement(<NoLiveBroadcast />);
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

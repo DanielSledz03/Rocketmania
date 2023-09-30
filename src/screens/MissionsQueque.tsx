@@ -16,7 +16,7 @@ export const MissionsQueque = () => {
 
   useEffect(() => {
     if (data?.allMission) dispatch(missionsSearchSliceActions.setMissions(data.allMission));
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <MainTemplate
@@ -25,7 +25,7 @@ export const MissionsQueque = () => {
         setLoading(true);
       }}
       refreshing={loading}
-      onBottom={() => {}}
+      onBottom={() => null}
     >
       <TouchableOpacity
         activeOpacity={1}
@@ -48,11 +48,13 @@ export const MissionsQueque = () => {
           missions={
             selectedAgencyName === ALL
               ? missions
-              : missions.filter((mission) => mission.rocket.Agencies[0].name === selectedAgencyName)
+              : missions
+                  .filter((mission) => mission.rocket.Agencies)
+                  .filter((mission) => mission.rocket.Agencies[0].name === selectedAgencyName)
           }
         />
-        {/* 
-        {loading &&
+
+        {/* {loading &&
           data?.missions?.meta.pagination.total !==
             data?.missions?.data?.length(
               <RobotoBold style={styles.loadingText}>Ładowanie..</RobotoBold>,

@@ -10,6 +10,7 @@ export const Photos = () => {
   if (!missionDetails?.rocket) {
     return <PhotosPlaceholder />;
   }
+
   return (
     <AnimatedView
       style={[styles.container, { marginBottom: missionDetails.patch?.asset.url ? 140 : 20 }]}

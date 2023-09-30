@@ -19,7 +19,6 @@ export const MissionDetails = () => {
           styles.propertiesContainer,
           {
             borderTopColor: expanded ? 'rgba(109, 109, 109, 0.2)' : 'transparent',
-
             height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
           },
         ]}

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     height: 270,
     borderRadius: 10,
     marginBottom: SCREEN_HEIGHT / 4,
-    marginTop: scale(20),
+    marginTop: scale(30),
   },
 
   rocketImage: {

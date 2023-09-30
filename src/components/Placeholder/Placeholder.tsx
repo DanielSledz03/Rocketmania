@@ -2,17 +2,6 @@ import { ReactNode } from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 10,
-  },
-  skeletonContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
-});
-
 interface PlaceholderProps {
   style?: StyleProp<ViewStyle>;
   children: ReactNode;
@@ -33,3 +22,13 @@ export const Placeholder = ({ style, children }: PlaceholderProps) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 10,
+  },
+  skeletonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+});

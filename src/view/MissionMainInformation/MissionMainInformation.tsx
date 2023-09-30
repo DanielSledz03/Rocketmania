@@ -15,8 +15,8 @@ export const MissionMainInformation = memo(function MissionMainInformation() {
   return (
     <View>
       <BackButtonAndBroadcast
-        goBack={() => navigation.goBack()}
-        handleLivestreamPress={() => {
+        navigateBack={() => navigation.goBack()}
+        handleLivestreamClick={() => {
           if (missionDetails?.livestream) {
             dispatch(youtubeModalSliceActions.toggleYoutubeModal());
             dispatch(youtubeModalSliceActions.setLivestreamLink(missionDetails?.livestream));

@@ -43,8 +43,9 @@ export const SearchLaunch = memo(function SearchLaunch() {
           >
             <RobotoRegular style={styles.searchItemTitle}>{item.name}</RobotoRegular>
           </TouchableOpacity>
-        )),
-    [missions, inputValue],
+        ))
+        .slice(0, 6),
+    [missions, inputValue, dispatch, navigation],
   );
 
   return (

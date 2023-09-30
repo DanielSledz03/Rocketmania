@@ -1,5 +1,6 @@
 import { RobotoBold, RobotoMedium } from '@components/texts';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import { useSelector } from 'react-redux';
 import { AnimatedView, CountdownWithStatus, Placeholder } from '@/components';
 import { RootState } from '@/store';
@@ -7,10 +8,41 @@ import { SCREEN_HEIGHT } from '@/utils';
 
 export const HeaderOfSection = () => {
   const missionDetails = useSelector((state: RootState) => state.missionDetails.missionDetails);
-  if (!missionDetails?.name) {
+  if (!missionDetails) {
     return (
       <Placeholder>
-        <View />
+        <SkeletonPlaceholder.Item
+          borderRadius={5}
+          height={20}
+          width={'80%'}
+          marginBottom={10}
+        ></SkeletonPlaceholder.Item>
+
+        <SkeletonPlaceholder.Item
+          borderRadius={5}
+          height={30}
+          width={'70%'}
+          marginBottom={30}
+        ></SkeletonPlaceholder.Item>
+        <SkeletonPlaceholder.Item
+          borderRadius={5}
+          height={30}
+          width={'70%'}
+          marginBottom={40}
+        ></SkeletonPlaceholder.Item>
+
+        <SkeletonPlaceholder.Item
+          borderRadius={5}
+          height={30}
+          width={'45%'}
+          marginBottom={30}
+        ></SkeletonPlaceholder.Item>
+
+        <SkeletonPlaceholder.Item
+          borderRadius={5}
+          height={20}
+          width={'55%'}
+        ></SkeletonPlaceholder.Item>
       </Placeholder>
     );
   }
@@ -25,6 +57,7 @@ export const HeaderOfSection = () => {
         targetDate={missionDetails.date}
         missionStatus={missionDetails.status}
         style={styles.countdown}
+        countdownStyles={styles.countdownStyles}
         changeLogs={missionDetails.changeLogs}
       />
     </AnimatedView>
@@ -46,6 +79,11 @@ const styles = StyleSheet.create({
   },
 
   countdown: { height: SCREEN_HEIGHT * 0.25, width: '100%' },
+
+  countdownStyles: {
+    marginTop: 10,
+    marginLeft: -15,
+  },
 
   placeholderOfSection: {
     flex: 1,

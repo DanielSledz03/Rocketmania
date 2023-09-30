@@ -5,6 +5,7 @@ import {
 import { HomeScreen } from '@/screens/HomeScreen';
 import { LaunchDetail } from '@/screens/LaunchDetail';
 import { MissionsQueque } from '@/screens/MissionsQueque';
+import { RocketDetails } from '@/screens/RocketDetails';
 import { Settings } from '@/screens/Settings';
 
 export type RocketLaunchesStackParamList = {
@@ -29,10 +30,10 @@ export const RocketLaunchesStack = () => {
       <RocketStack.Screen name='MissionsQueque' component={MissionsQueque} />
       <RocketStack.Screen name='LaunchDetails' component={LaunchDetail} />
       <RocketStack.Screen name='Settings' component={Settings} />
+      <RocketStack.Screen name='RocketDetails' component={RocketDetails} />
 
       {/* 
       <RocketStack.Screen name='BoosterDetails' component={BoosterDetails} />
-      <RocketStack.Screen name='RocketDetails' component={RocketDetails} />
       <RocketStack.Screen name='LaunchQueue' component={LaunchesQueue} />
       <RocketStack.Screen name='InformationPage' component={InformationPage} />
       <RocketStack.Screen name='Settings' component={Settings} /> */}

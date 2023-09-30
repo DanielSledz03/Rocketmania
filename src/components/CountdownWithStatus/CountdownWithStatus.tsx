@@ -16,7 +16,7 @@ import { moderateScale } from 'react-native-size-matters';
 import { getDate, StatusProps } from '@/utils';
 
 interface CountdownWithStatusProps {
-  targetDate: string;
+  targetDate: Date;
   style: StyleProp<ViewStyle>;
   countdownStyles?: StyleProp<ViewStyle>;
   missionStatus: string;
@@ -45,7 +45,7 @@ export const CountdownWithStatus = (props: CountdownWithStatusProps) => {
     <>
       <View style={[styles.container, style]}>
         <Countdown
-          missionStatus={missionStatus}
+          status={missionStatus}
           targetDate={targetDate}
           style={[styles.countdown, countdownStyles]}
         />
