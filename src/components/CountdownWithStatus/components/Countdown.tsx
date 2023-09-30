@@ -1,51 +1,26 @@
 import { Unit } from './Unit';
-import { RobotoBold } from '@components/texts';
 import { useEffect, useState } from 'react';
 import CountdownFromNPM from 'react-countdown';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
+import { RobotoBold } from '@/components/texts';
+import { calculateTimeDifference } from '@/utils';
 
-interface Props {
+interface CountdownProps {
   style: StyleProp<ViewStyle>;
-  date: any;
+  targetDate: Date;
   status: string;
 }
 
-const calculateDiff = (date: Date) => {
-  const date1: any = new Date(date);
-  const now: any = new Date();
-  // get total seconds between the times
-  let delta = Math.abs(date1 - now) / 1000;
+export const Countdown = ({ style, targetDate, status }: CountdownProps) => {
+  const [timeDifference, setTimeDifference] = useState(calculateTimeDifference(targetDate));
 
-  // calculate (and subtract) whole days
-  const days = Math.floor(delta / 86400);
-  delta -= days * 86400;
-
-  // calculate (and subtract) whole hours
-  const hours = Math.floor(delta / 3600) % 24;
-  delta -= hours * 3600;
-
-  // calculate (and subtract) whole minutes
-  const minutes = Math.floor(delta / 60) % 60;
-  delta -= minutes * 60;
-
-  return {
-    days,
-    hours,
-    minutes,
-    seconds: Math.round(delta),
-    miliseconds: Math.abs(date1 - now) / 1000,
-  };
-};
-
-export const Countdown = ({ style, date, status }: Props) => {
-  const [diffTime, setDiffTime] = useState(calculateDiff(date));
   useEffect(() => {
     const interval = setInterval(() => {
-      const difference = calculateDiff(date);
-      if (difference.miliseconds !== diffTime.miliseconds) {
-        if (new Date(date) < new Date() && status == 'InFlight') {
-          setDiffTime(difference);
+      const newTimeDifference = calculateTimeDifference(targetDate);
+      if (newTimeDifference.miliseconds !== timeDifference.miliseconds) {
+        if (new Date(targetDate) < new Date() && status === 'InFlight') {
+          setTimeDifference(newTimeDifference);
         }
       }
     }, 1000);
@@ -53,26 +28,26 @@ export const Countdown = ({ style, date, status }: Props) => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [status, targetDate, timeDifference]);
 
-  if (new Date(date) < new Date() && status == 'InFlight') {
+  if (new Date(targetDate) < new Date() && status === 'InFlight') {
     return (
       <View style={[styles.container, style]}>
         <View style={styles.tContainer}>
           <RobotoBold style={styles.text}>T+</RobotoBold>
         </View>
 
-        <Unit value={diffTime.days} unit='dni' />
-        <Unit value={diffTime.hours} unit='godz.' />
-        <Unit value={diffTime.minutes} unit='min.' />
-        <Unit value={diffTime.seconds} unit='sek.' />
+        <Unit value={timeDifference.days} unit='dni' />
+        <Unit value={timeDifference.hours} unit='godz.' />
+        <Unit value={timeDifference.minutes} unit='min.' />
+        <Unit value={timeDifference.seconds} unit='sek.' />
       </View>
     );
   }
 
   return (
     <CountdownFromNPM
-      date={status === 'Success' || status === 'Failed' ? new Date().toJSON() : date}
+      date={status === 'Success' || status === 'Failed' ? new Date().toJSON() : targetDate}
       renderer={({ hours, days, seconds, minutes, api }) => {
         if (status === 'Hold') {
           api.pause();
@@ -98,19 +73,20 @@ export const Countdown = ({ style, date, status }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '95%',
-    height: '12%',
+    height: 45,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
   },
   tContainer: {
     height: '100%',
-    width: '16%',
+    width: 20,
     justifyContent: 'center',
-    paddingLeft: 10,
+    marginLeft: 20,
+    marginRight: 10,
   },
 
   text: {

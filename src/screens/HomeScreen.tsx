@@ -37,12 +37,14 @@ export const HomeScreen = ({ navigation }: { navigation: HomeScreenNavigationPro
       <SectionPreview
         title='Starship'
         note='Rakieta przyszłości'
-        introduction='Nowości w Starbase'
+        introduction='Sekcja w trakcie budowy 🚀'
         description='Najpotężniejsza rakieta SpaceX zmieni loty w kosmos w rutynową czynność. Pozwoli zabrać ludzkość na Marsa, a może i jeszcze dalej?'
         photoUrl={require('@/assets/images/homepage/starship.png')}
-        buttonTitle='Dowiedz się więcej »'
+        buttonTitle='W trakcie budowy ⚙️'
         credits='SpaceX'
-        onPress={() => null}
+        onPress={() => {
+          navigation.navigate('InProgress');
+        }}
       />
     </MainTemplate>
   );

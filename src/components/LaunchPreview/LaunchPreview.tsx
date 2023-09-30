@@ -4,11 +4,11 @@ import { ButtonPrimary } from '../Buttons/PrimaryButton';
 import { CountdownWithStatus } from '../CountdownWithStatus/CountdownWithStatus';
 import { LaunchPreviewPlaceholder } from '../LaunchPreviewPlaceholder/LaunchPreviewPlaceholder';
 import { RobotoBold, RobotoRegular } from '@components/texts';
+import React from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { moderateScale } from 'react-native-size-matters';
 import { Mission } from '@/types/mission';
-import { SCREEN_HEIGHT } from '@/utils';
 
 interface Props {
   containerStyle?: StyleProp<ViewStyle>;
@@ -21,15 +21,22 @@ interface Props {
   additionalButtonOnPress?: () => void;
 }
 
-export const LaunchPreview = (props: Props) => {
-  const { mission } = props;
-
+export const LaunchPreview: React.FC<Props> = ({
+  containerStyle,
+  countdownStyle,
+  buttonTitle,
+  buttonOnPress,
+  mission,
+  buttonStyle,
+  additionalButton,
+  additionalButtonOnPress,
+}) => {
   if (!mission) {
-    return <LaunchPreviewPlaceholder containerStyle={styles.container} />;
+    return <LaunchPreviewPlaceholder />;
   }
 
   return (
-    <AnimatedView style={[styles.container, props.containerStyle]}>
+    <AnimatedView style={[styles.container, containerStyle]}>
       <AnimatedImage
         style={styles.image}
         source={{
@@ -40,31 +47,33 @@ export const LaunchPreview = (props: Props) => {
       <FastImage style={styles.gradient} source={require('@/assets/images/Gradient.png')} />
 
       <View style={styles.innerContainer}>
-        <RobotoRegular style={styles.upcomingMissionText}>
-          {!props.additionalButton ? 'MISJA:' : 'NAJBLIŻSZA MISJA:'}{' '}
-          <RobotoRegular style={styles.missionName}>{mission.name}</RobotoRegular>
-        </RobotoRegular>
+        <View>
+          <RobotoRegular style={styles.upcomingMissionText}>
+            {!additionalButton ? 'MISJA:' : 'NAJBLIŻSZA MISJA:'}{' '}
+            <RobotoRegular style={styles.missionName}>{mission.name}</RobotoRegular>
+          </RobotoRegular>
 
-        <RobotoBold style={styles.rocketName}>{mission.rocket.name}</RobotoBold>
+          <RobotoBold style={styles.rocketName}>{mission.rocket.name}</RobotoBold>
+        </View>
 
         <View style={styles.countdownStyle}>
           <CountdownWithStatus
-            date={mission.date}
-            style={props.countdownStyle}
-            status={mission.status}
+            targetDate={mission.date}
+            style={countdownStyle}
+            missionStatus={mission.status}
           />
         </View>
         <View style={styles.buttonsContainer}>
           <ButtonPrimary
-            title={props.buttonTitle}
-            onPress={props.buttonOnPress}
-            containerStyle={[styles.button, props.buttonStyle]}
+            title={buttonTitle}
+            onPress={buttonOnPress}
+            containerStyle={[styles.button, buttonStyle]}
             titleStyle={styles.buttonText}
           />
-          {props.additionalButton ? (
+          {additionalButton ? (
             <ButtonPrimary
               title={'Szczegóły misji »'}
-              onPress={props.additionalButtonOnPress}
+              onPress={additionalButtonOnPress}
               containerStyle={styles.additionalButton}
               titleStyle={styles.additionalButtonText}
             />
@@ -78,7 +87,7 @@ export const LaunchPreview = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: moderateScale(SCREEN_HEIGHT * 0.55),
+    height: moderateScale(423),
     backgroundColor: 'rgba(26, 26, 27, 1)',
     borderRadius: 10,
     overflow: 'hidden',
@@ -109,7 +118,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     padding: 10,
-    paddingVertical: 25,
+    // paddingVertical: 25,
     justifyContent: 'space-around',
     overflow: 'hidden',
   },
@@ -118,7 +127,6 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(13),
     color: '#6D6D6D',
     lineHeight: 23,
-    marginBottom: 5,
   },
 
   missionName: {

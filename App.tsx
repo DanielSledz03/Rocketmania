@@ -33,10 +33,15 @@ if (Platform.OS === 'android') {
   }
 }
 
+ErrorUtils.setGlobalHandler((error, isFatal) => {
+  console.error(error, isFatal);
+});
+
 function App(): JSX.Element {
   useEffect(() => {
     changeNavigationBarColor('black');
   }, []);
+
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>

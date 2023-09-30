@@ -3,27 +3,24 @@ import { Animated, LayoutAnimation, StyleSheet, View } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 import { ButtonExpand } from '@/components/Buttons/ButtonExpand';
 
-interface IProps {
+interface PropsInterface {
   children: string;
 }
 
-export const TextWithExpandButton = ({ children }: IProps) => {
+export const TextWithExpandButton = ({ children }: PropsInterface) => {
   const [expanded, setExpanded] = useState(false);
-  const [lines, setLines] = useState(0);
+
+  const TextStyles: any = [
+    styles.description,
+    {
+      height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
+    },
+  ];
 
   return (
     <>
       <View style={styles.container}>
-        <Animated.Text
-          onTextLayout={(e) => setLines(e.nativeEvent.lines.length)}
-          numberOfLines={expanded ? lines : 4}
-          style={[
-            styles.description,
-            {
-              height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
-            },
-          ]}
-        >
+        <Animated.Text numberOfLines={expanded ? 20 : 3} style={TextStyles}>
           {children}
         </Animated.Text>
       </View>

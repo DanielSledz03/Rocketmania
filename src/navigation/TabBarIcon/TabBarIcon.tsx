@@ -8,7 +8,6 @@ const IconTemplate = ({ icon, title, focused, stackName }: IconTemplateProps) =>
   const navigation = useNavigation();
 
   const handlePress = () => {
-    console.log('Press', stackName);
     navigation.navigate(stackName);
   };
 

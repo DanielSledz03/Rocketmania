@@ -1,6 +1,5 @@
-import { HeaderOfSectionPlaceholderLayout } from './LayoutPlaceholder';
 import { RobotoBold, RobotoMedium } from '@components/texts';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { AnimatedView, CountdownWithStatus, Placeholder } from '@/components';
 import { RootState } from '@/store';
@@ -10,10 +9,9 @@ export const HeaderOfSection = () => {
   const missionDetails = useSelector((state: RootState) => state.missionDetails.missionDetails);
   if (!missionDetails?.name) {
     return (
-      <Placeholder
-        containerStyle={styles.placeholderOfSection}
-        layout={HeaderOfSectionPlaceholderLayout}
-      />
+      <Placeholder>
+        <View />
+      </Placeholder>
     );
   }
 
@@ -24,8 +22,8 @@ export const HeaderOfSection = () => {
       </RobotoMedium>
       <RobotoBold style={styles.rocketName}>{missionDetails.rocket.name}</RobotoBold>
       <CountdownWithStatus
-        date={missionDetails.date}
-        status={missionDetails.status}
+        targetDate={missionDetails.date}
+        missionStatus={missionDetails.status}
         style={styles.countdown}
         changeLogs={missionDetails.changeLogs}
       />

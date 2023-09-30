@@ -18,7 +18,7 @@ const themeSlice = createSlice({
       try {
         AsyncStorage.setItem('@Theme', 'Dark');
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
       state.theme = SET_TO_DARK;
     },
@@ -27,7 +27,7 @@ const themeSlice = createSlice({
       try {
         AsyncStorage.setItem('@Theme', 'Light');
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
       state.theme = SET_TO_LIGHT;
     },

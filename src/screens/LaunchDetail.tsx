@@ -19,7 +19,7 @@ export const LaunchDetail = (props: {
 
   useEffect(() => {
     dispatch(missionsDetailsSliceActions.setMissionDetails(data?.allMission[0]));
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <MainTemplate

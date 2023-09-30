@@ -1,36 +1,35 @@
-// import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { StyleProp, ViewStyle } from 'react-native';
+import { ReactNode } from 'react';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-// import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 
-interface Props {
-  containerStyle: StyleProp<ViewStyle>;
-  layout?: any;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 10,
+  },
+  skeletonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+});
+
+interface PlaceholderProps {
+  style?: StyleProp<ViewStyle>;
+  children: ReactNode;
 }
 
-const layoutDefault = [{ key: 1, width: '100%', height: '100%', opacity: 0.8 }];
-
-export const Placeholder = (props: Props) => {
-  const { containerStyle, layout = layoutDefault } = props;
+export const Placeholder = ({ style, children }: PlaceholderProps) => {
   return (
-    <SkeletonPlaceholder highlightColor='#FF0000' speed={1800} shimmerWidth={200}>
-      <SkeletonPlaceholder.Item flexDirection='row' alignItems='center'>
-        <SkeletonPlaceholder.Item width={120} height={60} borderRadius={50} />
-        <SkeletonPlaceholder.Item marginLeft={20}>
-          <SkeletonPlaceholder.Item width={120} height={20} borderRadius={4} />
-          <SkeletonPlaceholder.Item marginTop={6} width={80} height={20} />
-        </SkeletonPlaceholder.Item>
-      </SkeletonPlaceholder.Item>
-    </SkeletonPlaceholder>
+    <View style={[styles.container, style]}>
+      <SkeletonPlaceholder
+        highlightColor='#333333'
+        backgroundColor='rgba(39, 39, 40, 1)'
+        speed={1600}
+        shimmerWidth={400}
+        enabled
+      >
+        <View style={styles.skeletonContainer}>{children}</View>
+      </SkeletonPlaceholder>
+    </View>
   );
-  // return (
-  //   <SkeletonContent
-  //     isLoading={true}
-  //     boneColor='rgba(39, 39, 40, 1)'
-  //     highlightColor='#333333'
-  //     duration={1700}
-  //     containerStyle={containerStyle}
-  //     layout={layout}
-  //   />
-  // );
 };

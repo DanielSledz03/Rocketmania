@@ -1,9 +1,10 @@
 import { TabBarIcon } from '../TabBarIcon/TabBarIcon';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 const BottomBar = ({ navigation }: BottomTabBarProps) => {
   const focusedScreen = navigation.getState().routeNames[navigation.getState().index];
+  console.log(focusedScreen);
   return (
     <View style={styles.bottombar}>
       <TabBarIcon
@@ -11,7 +12,7 @@ const BottomBar = ({ navigation }: BottomTabBarProps) => {
         icon={require('@/assets/images/navigation/rocket_white.png')}
         iconFocused={require('@/assets/images/navigation/rocket_gray.png')}
         title='Starty rakiet'
-        stackName='HomeScreen'
+        stackName='RocketLaunchesStack'
       />
 
       <TabBarIcon
@@ -47,12 +48,13 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     width: '100%',
-    height: 90,
+    height: Platform.OS === 'ios' ? 130 : 90,
     paddingVertical: 15,
     paddingHorizontal: 30,
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: 'black',
+    paddingBottom: Platform.OS === 'ios' ? 40 : 0,
   },
 
   image: {

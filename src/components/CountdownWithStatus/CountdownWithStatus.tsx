@@ -15,53 +15,73 @@ import {
 import { moderateScale } from 'react-native-size-matters';
 import { getDate, StatusProps } from '@/utils';
 
-interface Props {
-  date: string;
+interface CountdownWithStatusProps {
+  targetDate: string;
   style: StyleProp<ViewStyle>;
   countdownStyles?: StyleProp<ViewStyle>;
-  status: string;
+  missionStatus: string;
   changeLogs?: string[];
 }
 
-export const CountdownWithStatus = (props: Props) => {
-  const { date, style, countdownStyles, status, changeLogs } = props;
-  const [expanded, setExpanded] = useState(false);
-  const LaunchDate = new Date(date);
+export const CountdownWithStatus = (props: CountdownWithStatusProps) => {
+  const { targetDate, style, countdownStyles, missionStatus, changeLogs } = props;
+  const [isExpanded, setIsExpanded] = useState(false);
+  const missionDate = new Date(targetDate);
+
+  const changeLogsArray = changeLogs
+    ? changeLogs.map((item, index, array) => {
+        return (
+          <TimeLineItem
+            key={index}
+            date={item.split(': ')[0]}
+            text={item.split(': ')[1]}
+            isLast={index + 1 === array.length ? true : false}
+          />
+        );
+      })
+    : [];
+
   return (
     <>
       <View style={[styles.container, style]}>
-        <Countdown status={status} date={date} style={[styles.countdown, countdownStyles]} />
+        <Countdown
+          missionStatus={missionStatus}
+          targetDate={targetDate}
+          style={[styles.countdown, countdownStyles]}
+        />
         <View style={styles.statusAndDateBox}>
-          <View style={styles.width100}>
+          <View style={styles.fullWidth}>
             <View style={styles.missionStatusBox}>
               <View style={styles.line} />
 
               <RobotoLight style={styles.uppercase}>STATUS MISJI</RobotoLight>
             </View>
-            <View style={styles.width100}>
-              <SpaceGroteskBold style={[styles.status, { color: StatusProps(status).color }]}>
-                {StatusProps(status).text}
+            <View style={styles.fullWidth}>
+              <SpaceGroteskBold
+                style={[styles.status, { color: StatusProps(missionStatus).color }]}
+              >
+                {StatusProps(missionStatus).text}
               </SpaceGroteskBold>
             </View>
           </View>
 
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => setExpanded((prev) => !prev)}
-            style={styles.width100}
+            onPress={() => setIsExpanded((prev) => !prev)}
+            style={styles.fullWidth}
           >
-            <View style={styles.launchDateContainer}>
+            <View style={styles.missionDateContainer}>
               <View style={styles.line} />
 
-              <RobotoLight style={styles.launchDate}>Data startu</RobotoLight>
+              <RobotoLight style={styles.missionDate}>Data startu</RobotoLight>
             </View>
             <View style={styles.dateBox}>
-              <RobotoMedium>{getDate(LaunchDate, status).text}</RobotoMedium>
+              <RobotoMedium>{getDate(missionDate, missionStatus).text}</RobotoMedium>
               {changeLogs && (
                 <Image
                   resizeMode='contain'
                   source={
-                    expanded
+                    isExpanded
                       ? require('@/assets/images/expand/expandRotated.png')
                       : require('@/assets/images/expand/expand.png')
                   }
@@ -78,17 +98,7 @@ export const CountdownWithStatus = (props: Props) => {
             height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
           }}
         >
-          {expanded &&
-            changeLogs.map((item, index, array) => {
-              return (
-                <TimeLineItem
-                  key={index}
-                  date={item.split(': ')[0]}
-                  text={item.split(': ')[1]}
-                  isLast={index + 1 === array.length ? true : false}
-                />
-              );
-            })}
+          {isExpanded && changeLogsArray}
         </Animated.View>
       )}
     </>
@@ -101,9 +111,9 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 
-  countdown: { height: '25%', marginBottom: '5%' },
+  countdown: { height: 45, marginBottom: '5%' },
 
-  width100: {
+  fullWidth: {
     width: '100%',
   },
 
@@ -134,14 +144,14 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(22),
   },
 
-  launchDateContainer: {
+  missionDateContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginBottom: 2,
   },
 
-  launchDate: {
+  missionDate: {
     textTransform: 'uppercase',
     color: 'white',
   },

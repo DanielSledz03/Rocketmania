@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
-    paddingTop: Platform.OS === 'ios' ? 10 : 0,
+    paddingTop: Platform.OS === 'ios' ? 40 : 0,
   },
 
   headerBar: {

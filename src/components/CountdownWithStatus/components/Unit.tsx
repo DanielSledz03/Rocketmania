@@ -20,7 +20,8 @@ export const Unit = ({ value, unit }: Props) => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    width: '21%',
+    minWidth: 40,
+    marginLeft: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
