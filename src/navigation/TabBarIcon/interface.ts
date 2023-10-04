@@ -1,3 +1,4 @@
+import { RootStackParamList } from '../RootStack';
 import { ImageSourcePropType } from 'react-native';
 
 export interface TabBarIconProps {
@@ -12,5 +13,5 @@ export interface IconTemplateProps {
   icon: ImageSourcePropType;
   title: string;
   focused: boolean;
-  stackName: string;
+  stackName: RootStackParamList;
 }

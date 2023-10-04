@@ -37,9 +37,8 @@ export const LaunchesList = memo(function LaunchesList({ missions }: { missions:
       {missionsList}
 
       {missions
-        .filter((mission) => mission.rocket.Agencies)
-        .filter((mission) => mission.rocket.Agencies[0].name === selectedAgencyName).length <=
-        0 && (
+        .filter((mission) => mission.rocket.agency)
+        .filter((mission) => mission.rocket.agency.name === selectedAgencyName).length <= 0 && (
         <View style={styles.bottomPlaceholderContainer}>
           <FastImage
             style={styles.bottomPlaceholderImage}

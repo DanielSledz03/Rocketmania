@@ -49,8 +49,8 @@ export const MissionsQueque = () => {
             selectedAgencyName === ALL
               ? missions
               : missions
-                  .filter((mission) => mission.rocket.Agencies)
-                  .filter((mission) => mission.rocket.Agencies[0].name === selectedAgencyName)
+                  .filter((mission) => mission.rocket.agency)
+                  .filter((mission) => mission.rocket.agency.name === selectedAgencyName)
           }
         />
 

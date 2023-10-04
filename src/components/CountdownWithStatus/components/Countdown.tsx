@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   tContainer: {
     height: '100%',
-    width: 20,
+    width: 25,
     justifyContent: 'center',
     marginLeft: 20,
     marginRight: 10,

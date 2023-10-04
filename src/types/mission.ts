@@ -8,7 +8,7 @@ export interface Mission {
   date: Date;
   status: string;
   description?: string;
-  specifications?: string[];
+  specifications?: string;
   windowStart?: string;
   windowEnd?: string;
   probability?: number;

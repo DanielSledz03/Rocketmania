@@ -12,7 +12,7 @@ import { TabNavigation } from '@/navigation/TabNavigation/TabNavigation';
 import store from '@/store/store';
 
 const client = new ApolloClient({
-  uri: 'https://voux0k38.api.sanity.io/v1/graphql/production/default',
+  uri: 'https://vjzwc7w5.api.sanity.io/v2023-08-01/graphql/development/default',
   cache: new InMemoryCache({
     dataIdFromObject(responseObject) {
       switch (responseObject.__typename) {

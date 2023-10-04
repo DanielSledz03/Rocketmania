@@ -4,14 +4,15 @@ import { StyleSheet, View } from 'react-native';
 interface Props {
   date: string;
   text: string;
-  isLast: boolean;
+  isLast?: boolean;
+  dotColor?: string;
 }
 
-export const TimeLineItem = ({ date, text, isLast = false }: Props) => {
+export const TimeLineItem = ({ date, text, isLast = false, dotColor = '#F5B308' }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.lineAndDottContainer}>
-        <View style={styles.dott} />
+        <View style={[styles.dott, { backgroundColor: dotColor }]} />
 
         {!isLast && <View style={styles.line} />}
       </View>
@@ -41,7 +42,6 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#F5B308',
   },
 
   line: { width: 1, height: '95%', backgroundColor: 'gray' },

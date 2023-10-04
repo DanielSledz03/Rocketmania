@@ -20,12 +20,12 @@ export const TextWithExpandButton = ({ children }: PropsInterface) => {
   return (
     <>
       <View style={styles.container}>
-        <Animated.Text numberOfLines={expanded ? 20 : 3} style={TextStyles}>
-          {children}
+        <Animated.Text style={TextStyles}>
+          {expanded ? children : children.length > 600 ? children.slice(0, 600) + '...' : children}
         </Animated.Text>
       </View>
 
-      {children.length < 280 ? null : (
+      {children.length < 600 ? null : (
         <ButtonExpand setIsExpand={setExpanded} isExpand={expanded} />
       )}
     </>

@@ -11,18 +11,18 @@ export const MissionDetails = () => {
   const [expanded, setExpanded] = useState(false);
   const missionDetails = useSelector((state: RootState) => state.missionDetails.missionDetails);
 
+  const propertiesContainerStyles: any = [
+    styles.propertiesContainer,
+    {
+      borderTopColor: expanded ? 'rgba(109, 109, 109, 0.2)' : 'transparent',
+      height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
+    },
+  ];
+
   return (
     <>
-      <RobotoBold>SZCZEGÓŁY MISJI</RobotoBold>
-      <View
-        style={[
-          styles.propertiesContainer,
-          {
-            borderTopColor: expanded ? 'rgba(109, 109, 109, 0.2)' : 'transparent',
-            height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
-          },
-        ]}
-      >
+      {missionDetails?.specifications && <RobotoBold>SZCZEGÓŁY MISJI</RobotoBold>}
+      <View style={propertiesContainerStyles}>
         {expanded ? (
           <>
             {missionDetails?.date && (
@@ -45,7 +45,11 @@ export const MissionDetails = () => {
               <Property name='PRAWDOPODOBIEŃSTWO LOTU' value={missionDetails?.probability + '%'} />
             )}
             {missionDetails?.specifications && (
-              <PropertiesList list={missionDetails?.specifications} />
+              <PropertiesList
+                list={missionDetails?.specifications
+                  .split('\n')
+                  .filter((item) => item != '' || item.length > 0)}
+              />
             )}
           </>
         ) : null}
@@ -64,7 +68,6 @@ export const MissionDetails = () => {
 
 const styles = StyleSheet.create({
   propertiesContainer: {
-    height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
     borderWidth: 1,
     marginTop: 30,
   },

@@ -41,7 +41,7 @@ export const GET_ALL_LAUNCHES = gql(`
           url
         }
       }
-      Agencies {
+      agency {
         name
       }
     }
