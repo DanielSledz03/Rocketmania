@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     width: '100%',
-    height: Platform.OS === 'ios' ? 130 : 90,
+    height: Platform.OS === 'ios' ? 100 : 90,
     paddingVertical: 15,
     paddingHorizontal: 30,
     flexDirection: 'row',

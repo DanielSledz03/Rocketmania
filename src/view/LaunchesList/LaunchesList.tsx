@@ -3,14 +3,20 @@ import { memo, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSelector } from 'react-redux';
-import { RobotoRegular } from '@/components';
+import { RobotoBold, RobotoRegular } from '@/components';
 import { LaunchPreview } from '@/components/LaunchPreview/LaunchPreview';
 import { HomeScreenNavigationProp } from '@/screens/HomeScreen';
 import { RootState } from '@/store';
 import { Mission } from '@/types/mission';
 import { SCREEN_HEIGHT } from '@/utils';
 
-export const LaunchesList = memo(function LaunchesList({ missions }: { missions: Mission[] }) {
+export const LaunchesList = memo(function LaunchesList({
+  missions,
+  isLoadingMore,
+}: {
+  missions: Mission[];
+  isLoadingMore: boolean;
+}) {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const { selectedAgencyName } = useSelector((state: RootState) => state.missionsFilters);
 
@@ -36,20 +42,26 @@ export const LaunchesList = memo(function LaunchesList({ missions }: { missions:
     <View style={styles.launchesListContainer}>
       {missionsList}
 
-      {missions
-        .filter((mission) => mission.rocket.agency)
-        .filter((mission) => mission.rocket.agency.name === selectedAgencyName).length <= 0 && (
+      {isLoadingMore ? (
         <View style={styles.bottomPlaceholderContainer}>
-          <FastImage
-            style={styles.bottomPlaceholderImage}
-            resizeMode='contain'
-            source={require('../../assets/images/AllRocketsImage.png')}
-          />
-
-          <RobotoRegular style={styles.bottomPlaceholderTitle}>
-            Nie znaleziono startów {':('}
-          </RobotoRegular>
+          <RobotoBold style={styles.bottomPlaceholderTitle}>Ładowanie..</RobotoBold>
         </View>
+      ) : (
+        missions.filter(
+          (mission) => mission.rocket.agency && mission.rocket.agency.name === selectedAgencyName,
+        ).length <= 0 && (
+          <View style={styles.bottomPlaceholderContainer}>
+            <FastImage
+              style={styles.bottomPlaceholderImage}
+              resizeMode='contain'
+              source={require('../../assets/images/AllRocketsImage.png')}
+            />
+
+            <RobotoRegular style={styles.bottomPlaceholderTitle}>
+              Nie znaleziono startów {':('}
+            </RobotoRegular>
+          </View>
+        )
       )}
     </View>
   );
@@ -82,5 +94,11 @@ const styles = StyleSheet.create({
 
   bottomPlaceholderImage: {
     flex: 1,
+  },
+
+  loadingText: {
+    fontSize: 15,
+    paddingVertical: 25,
+    textAlign: 'center',
   },
 });

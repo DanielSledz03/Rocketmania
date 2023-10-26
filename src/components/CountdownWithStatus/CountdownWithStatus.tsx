@@ -13,7 +13,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { getDate, StatusProps } from '@/utils';
+import { getFormattedLaunchDate, StatusProps } from '@/utils';
 
 interface CountdownWithStatusProps {
   targetDate: Date;
@@ -76,7 +76,7 @@ export const CountdownWithStatus = (props: CountdownWithStatusProps) => {
               <RobotoLight style={styles.missionDate}>Data startu</RobotoLight>
             </View>
             <View style={styles.dateBox}>
-              <RobotoMedium>{getDate(missionDate, missionStatus).text}</RobotoMedium>
+              <RobotoMedium>{getFormattedLaunchDate(missionDate, missionStatus).text}</RobotoMedium>
               {changeLogs && (
                 <Image
                   resizeMode='contain'

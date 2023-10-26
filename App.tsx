@@ -10,6 +10,7 @@ import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import { Provider } from 'react-redux';
 import { TabNavigation } from '@/navigation/TabNavigation/TabNavigation';
 import store from '@/store/store';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const client = new ApolloClient({
   uri: 'https://vjzwc7w5.api.sanity.io/v2023-08-01/graphql/development/default',
@@ -43,11 +44,13 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <TabNavigation />
-      </Provider>
-    </ApolloProvider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <TabNavigation />
+        </Provider>
+      </ApolloProvider>
+    </SafeAreaView>
   );
 }
 

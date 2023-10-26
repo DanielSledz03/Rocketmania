@@ -6,7 +6,7 @@ import { moderateScale } from 'react-native-size-matters';
 import { useSelector } from 'react-redux';
 import { TimeLineItem } from '@/components';
 import { RobotoBold, RobotoRegular } from '@/components/texts';
-import { GET_ROCKET_LAST_LAUNCHES } from '@/constants/Queries/RocketDetails';
+import { GET_ROCKET_LAST_LAUNCHES } from '@/constants/queries/RocketDetails';
 import { RootState } from '@/store';
 import { Mission } from '@/types';
 import { translateDate, useFetch } from '@/utils';

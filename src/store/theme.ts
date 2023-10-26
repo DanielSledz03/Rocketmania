@@ -1,4 +1,4 @@
-import { SET_TO_DARK, SET_TO_LIGHT } from './Types/ThemeTypes';
+import { SET_TO_DARK, SET_TO_LIGHT } from './types/ThemeTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice } from '@reduxjs/toolkit';
 

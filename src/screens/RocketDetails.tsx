@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MainTemplate } from '@/components';
-import { GET_ROCKET_DETAILS } from '@/constants/Queries/RocketDetails';
+import { GET_ROCKET_DETAILS } from '@/constants/queries/RocketDetails';
 import { RootState } from '@/store';
 import { setRocketDetails } from '@/store/rocketDetails';
 import { useFetch } from '@/utils';

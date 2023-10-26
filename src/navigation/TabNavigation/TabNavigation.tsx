@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeDark, ThemeLight } from '@/constants';
 import { RootState } from '@/store/store';
-import { SET_TO_DARK } from '@/store/Types/ThemeTypes';
+import { SET_TO_DARK } from '@/store/types/ThemeTypes';
 import { setFirstAppLaunch } from '@/utils/setFirstAppLaunch';
 import { setTheme } from '@/utils/setTheme';
 

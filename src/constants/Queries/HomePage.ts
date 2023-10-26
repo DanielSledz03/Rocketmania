@@ -27,8 +27,12 @@ export const GET_INCOMING_LAUNCH = gql(`
     `);
 
 export const GET_ALL_LAUNCHES = gql(`
-{
-  allMission(where: { archived: { eq: false } }, sort: [{ date: ASC }]) {
+query GetMissions($limit: Int){
+  allMission(
+    where: { archived: { eq: false } }
+    sort: [{ date: ASC }]
+    limit: $limit
+  ) {
     name
     date
     status
@@ -45,10 +49,10 @@ export const GET_ALL_LAUNCHES = gql(`
         name
       }
     }
-
     _id
   }
 }
+
     `);
 
 export const GET_LAUNCH_BY_ID = gql(`

@@ -5,7 +5,7 @@ import { LayoutAnimation, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { missionsFiltersSliceActions } from '@/store/missionsFilters';
 import { RootState } from '@/store/store';
-import { ALL, ESA, NASA, ROCKET_LAB, ROSCOSMOS, SPACEX, ULA } from '@/store/Types/AgencyNames';
+import { ALL, ESA, NASA, ROCKET_LAB, ROSCOSMOS, SPACEX, ULA } from '@/store/types/AgencyNames';
 
 const agencies = [SPACEX, ESA, ULA, ROSCOSMOS, ROCKET_LAB, NASA];
 

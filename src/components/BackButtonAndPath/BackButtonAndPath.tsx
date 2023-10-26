@@ -3,6 +3,7 @@ import { RobotoLight } from '../texts';
 import { useNavigation } from '@react-navigation/native';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { SCREEN_HEIGHT } from '@/utils';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 interface IProps {
   text: string;
@@ -28,8 +29,10 @@ export const BackButtonAndPath = ({ text, boldText }: IProps) => {
             <RobotoLight style={styles.rocketNameInPath}>{boldText}</RobotoLight>
           </RobotoLight>
         ) : (
-          <Placeholder>
-            <View />
+          <Placeholder style={styles.skeletonContent}>
+            <View style={styles.skeletonContent}>
+              <SkeletonPlaceholder.Item height={'100%'} width={'100%'} borderRadius={5} />
+            </View>
           </Placeholder>
         )}
       </View>

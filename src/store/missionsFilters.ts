@@ -1,4 +1,4 @@
-import { ALL } from './Types/AgencyNames';
+import { ALL } from './types/AgencyNames';
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface missionsFiltersState {

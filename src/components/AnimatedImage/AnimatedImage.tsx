@@ -2,11 +2,11 @@ import { Placeholder } from '../Placeholder/Placeholder';
 import { RobotoLight, RobotoRegular } from '../texts';
 import { useState } from 'react';
 import { Alert, ImageStyle, StyleSheet, TouchableOpacity, View } from 'react-native';
-import FastImage, { ResizeMode } from 'react-native-fast-image';
+import FastImage, { ResizeMode, Source } from 'react-native-fast-image';
 
 interface Props {
   style: ImageStyle;
-  source: any;
+  source: Source | { uri: string };
   resizeMode?: ResizeMode;
   credits?: string;
 }

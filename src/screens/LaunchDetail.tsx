@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MainTemplate } from '@/components';
-import { GET_LAUNCH_BY_ID } from '@/constants/Queries/HomePage';
+import { GET_LAUNCH_BY_ID } from '@/constants/queries/HomePage';
 import { missionsDetailsSliceActions, RootState } from '@/store';
 import { useFetch } from '@/utils';
 import { InformationAboutMission, MissionDetails, MissionMainInformation, Payloads } from '@/view';

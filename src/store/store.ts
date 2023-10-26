@@ -4,6 +4,7 @@ import missionsSearchReducer from './missionsSearch';
 import rocketDetailsReducer from './rocketDetails';
 import themeReducer from './theme';
 import youtubeModalReducer from './youtubeModal';
+import boosterDetailsReducer from './boosterDetails';
 
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
@@ -16,6 +17,7 @@ const store = configureStore({
     youtubeModal: youtubeModalReducer,
     missionDetails: missionDetailsReducer,
     rocketDetails: rocketDetailsReducer,
+    boosterDetails: boosterDetailsReducer,
   },
   middleware: [thunk],
 });

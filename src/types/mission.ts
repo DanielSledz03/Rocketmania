@@ -14,6 +14,7 @@ export interface Mission {
   probability?: number;
   livestream?: string;
   changeLogs?: string[];
+  launchPad?: string;
   patch?: Image;
   rocket: Rocket;
   _id: string;
