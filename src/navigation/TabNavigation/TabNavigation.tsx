@@ -11,6 +11,7 @@ import { RootState } from '@/store/store';
 import { SET_TO_DARK } from '@/store/types/ThemeTypes';
 import { setFirstAppLaunch } from '@/utils/setFirstAppLaunch';
 import { setTheme } from '@/utils/setTheme';
+import { SafeAreaView } from 'react-native';
 
 export type RootStackParamList = {
   RocketLaunchesStack: RocketLaunchesStackParamList;
@@ -31,10 +32,12 @@ export const TabNavigation = () => {
 
   return (
     <NavigationContainer theme={Theme === SET_TO_DARK ? ThemeDark : ThemeLight}>
-      <Tab.Navigator screenOptions={TabNavigation_ScreenOptions} tabBar={BottomBar}>
-        <Tab.Screen component={RocketLaunchesStack} name='RocketLaunchesStack' />
-        <Tab.Screen component={StarshipStack} name='StarshipStack' />
-      </Tab.Navigator>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Tab.Navigator screenOptions={TabNavigation_ScreenOptions} tabBar={BottomBar}>
+          <Tab.Screen component={RocketLaunchesStack} name='RocketLaunchesStack' />
+          <Tab.Screen component={StarshipStack} name='StarshipStack' />
+        </Tab.Navigator>
+      </SafeAreaView>
     </NavigationContainer>
   );
 };

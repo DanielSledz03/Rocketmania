@@ -1,4 +1,4 @@
-package com.rocketmania;
+package com.danielsledz.rakietomaniaapp;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

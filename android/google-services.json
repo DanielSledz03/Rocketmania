@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "434998415835",
+    "project_id": "rakietomaniaapp-d3324",
+    "storage_bucket": "rakietomaniaapp-d3324.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434998415835:android:cc41ea73504d5d7b7e17fe",
+        "android_client_info": {
+          "package_name": "com.danielsledz.rakietomaniaapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDphIj5Oivm27djUSBWrVxli9cbTL6ozFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

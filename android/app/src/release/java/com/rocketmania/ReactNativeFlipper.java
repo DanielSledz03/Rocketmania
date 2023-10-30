@@ -4,10 +4,11 @@
  * <p>This source code is licensed under the MIT license found in the LICENSE file in the root
  * directory of this source tree.
  */
-package com.rocketmania;
+package com.danielsledz.rakietomaniaapp;
 
 import android.content.Context;
 import com.facebook.react.ReactInstanceManager;
+
 
 /**
  * Class responsible of loading Flipper inside your React Native application. This is the release
