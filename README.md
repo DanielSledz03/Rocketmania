@@ -1,6 +1,6 @@
 # Rakietomania App V2
 
-Welcome to the mobile application "Rakietomania", created using React Native!
+Welcome to the "Rakietomania V2" mobile app under development using React Native!
 
 ![Alt tekst dla obrazu](src/assets/images/coming_soon.png)
 
