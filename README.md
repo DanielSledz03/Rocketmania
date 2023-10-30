@@ -2,6 +2,9 @@
 
 Welcome to the mobile application "Rakietomania", created using React Native!
 
+![Alt tekst dla obrazu](src/assets/images/coming_soon.png)
+
+
 ---
 
 ## Basic Information:
