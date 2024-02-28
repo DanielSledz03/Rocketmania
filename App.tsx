@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ApolloClient,
   ApolloProvider,
@@ -64,7 +65,7 @@ ErrorUtils.setGlobalHandler((error, isFatal) => {
 //     console.error(err);
 //   });
 
-function App(): JSX.Element {
+function App(): React.JSX.Element {
   useEffect(() => {
     changeNavigationBarColor('black');
   }, []);

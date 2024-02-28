@@ -64,7 +64,7 @@ export const HomeScreen = ({ navigation }: { navigation: HomeScreenNavigationPro
         mission.refetch();
       }}
     >
-      <Button title='Display Notification' onPress={() => onDisplayNotification()} />
+      {/* <Button title='Display Notification' onPress={() => onDisplayNotification()} /> */}
 
       <LaunchPreview
         mission={mission.data?.allMission[0]}
