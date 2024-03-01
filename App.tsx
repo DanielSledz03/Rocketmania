@@ -1,118 +1,82 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+  ApolloClient,
+  ApolloProvider,
+  defaultDataIdFromObject,
+  InMemoryCache,
+} from '@apollo/client';
+import { useEffect } from 'react';
+import { Platform, Text, UIManager } from 'react-native';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
+import { Provider } from 'react-redux';
+// import {TabNavigation} from '@/navigation/TabNavigation/TabNavigation';
+// import store from '@/store/store';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import SpInAppUpdates, {
+  NeedsUpdateResponse,
+  IAUUpdateKind,
+  StartUpdateOptions,
+} from 'sp-react-native-in-app-updates';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+const client = new ApolloClient({
+  uri: 'https://vjzwc7w5.api.sanity.io/v2023-08-01/graphql/development/default',
+  cache: new InMemoryCache({
+    dataIdFromObject(responseObject) {
+      switch (responseObject.__typename) {
+        case 'Rocket':
+          return `Rocket:${responseObject._id}`;
+        case 'Mission':
+          return `Mission:${responseObject._id}`;
+        default:
+          return defaultDataIdFromObject(responseObject);
+      }
+    },
+  }),
 });
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
+
+ErrorUtils.setGlobalHandler((error, isFatal) => {
+  console.error(error, isFatal);
+});
+
+// const inAppUpdates = new SpInAppUpdates(
+//   true, // isDebug
+// );
+// inAppUpdates
+//   .checkNeedsUpdate()
+//   .then((result) => {
+//     if (result.shouldUpdate) {
+//       let updateOptions: StartUpdateOptions = {};
+//       if (Platform.OS === 'android') {
+//         // android only, on iOS the user will be promped to go to your app store page
+//         updateOptions = {
+//           updateType: IAUUpdateKind.FLEXIBLE,
+//         };
+//       }
+//       inAppUpdates.startUpdate(updateOptions); // https://github.com/SudoPlz/sp-react-native-in-app-updates/blob/master/src/types.ts#L78
+//     }
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+
+function App(): JSX.Element {
+  useEffect(() => {
+    changeNavigationBarColor('black');
+  }, []);
+
+  return (
+    <ApolloProvider client={client}>
+      {/* <Provider store={store}>
+        <TabNavigation />
+      </Provider> */}
+      <Text>Hello</Text>
+    </ApolloProvider>
+  );
+}
 
 export default App;
