@@ -3,28 +3,30 @@ import {
   ApolloProvider,
   defaultDataIdFromObject,
   InMemoryCache,
-} from '@apollo/client';
-import { useEffect } from 'react';
-import { Platform, Text, UIManager } from 'react-native';
-import changeNavigationBarColor from 'react-native-navigation-bar-color';
-import { Provider } from 'react-redux';
-// import {TabNavigation} from '@/navigation/TabNavigation/TabNavigation';
-// import store from '@/store/store';
-import { SafeAreaView } from 'react-native-safe-area-context';
+} from "@apollo/client";
+import { useEffect } from "react";
+import { Platform, Text, UIManager } from "react-native";
+import changeNavigationBarColor from "react-native-navigation-bar-color";
+import { Provider } from "react-redux";
+
+import { TabNavigation } from "@/navigation/TabNavigation/TabNavigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import SpInAppUpdates, {
   NeedsUpdateResponse,
   IAUUpdateKind,
   StartUpdateOptions,
-} from 'sp-react-native-in-app-updates';
+} from "sp-react-native-in-app-updates";
+
+import store from "@/store/store";
 
 const client = new ApolloClient({
-  uri: 'https://vjzwc7w5.api.sanity.io/v2023-08-01/graphql/development/default',
+  uri: "https://vjzwc7w5.api.sanity.io/v2023-08-01/graphql/development/default",
   cache: new InMemoryCache({
     dataIdFromObject(responseObject) {
       switch (responseObject.__typename) {
-        case 'Rocket':
+        case "Rocket":
           return `Rocket:${responseObject._id}`;
-        case 'Mission':
+        case "Mission":
           return `Mission:${responseObject._id}`;
         default:
           return defaultDataIdFromObject(responseObject);
@@ -33,7 +35,7 @@ const client = new ApolloClient({
   }),
 });
 
-if (Platform.OS === 'android') {
+if (Platform.OS === "android") {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
@@ -66,15 +68,14 @@ ErrorUtils.setGlobalHandler((error, isFatal) => {
 
 function App(): JSX.Element {
   useEffect(() => {
-    changeNavigationBarColor('black');
+    changeNavigationBarColor("black");
   }, []);
 
   return (
     <ApolloProvider client={client}>
-      {/* <Provider store={store}>
+      <Provider store={store}>
         <TabNavigation />
-      </Provider> */}
-      <Text>Hello</Text>
+      </Provider>
     </ApolloProvider>
   );
 }
