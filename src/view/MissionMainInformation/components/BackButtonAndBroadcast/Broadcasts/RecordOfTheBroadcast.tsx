@@ -1,17 +1,23 @@
-import { BroadcastStyle } from './BroadcastStyle';
-import { IBroadcast } from './intreface';
-import { Image, Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { RobotoBold } from '@/components/texts';
+import { BroadcastStyle } from "./BroadcastStyle";
+import { IBroadcast } from "./interface";
+import {
+  Image,
+  Linking,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { RobotoBold } from "@/components/texts";
 
-export const RecordOfTheBroadcast = ({ streamLink = '' }: IBroadcast) => {
+export const RecordOfTheBroadcast = ({ streamLink = "" }: IBroadcast) => {
   return (
     <TouchableOpacity
       onPress={() => Linking.openURL(streamLink)}
       style={[BroadcastStyle.container, styles.container]}
     >
       <Image
-        source={require('@/assets/images/launches/dott.png')}
-        resizeMode='contain'
+        source={require("@/assets/images/launches/dott.png")}
+        resizeMode="contain"
         style={BroadcastStyle.dott}
       />
       <View style={BroadcastStyle.centerElement}>
@@ -23,8 +29,8 @@ export const RecordOfTheBroadcast = ({ streamLink = '' }: IBroadcast) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: "white",
   },
 });

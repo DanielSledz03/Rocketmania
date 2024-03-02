@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   MainTemplate,
   Placeholder,
@@ -7,17 +7,20 @@ import {
   RobotoBold,
   RobotoLight,
   RobotoMedium,
-} from '@/components';
-import { RootState } from '@/store';
-import { translateMonth, useFetch } from '@/utils';
-import { GET_BOOSTER_DETAILS, GET_BOOSTER_MISSIONS } from '@/constants/queries/Booster';
-import { setBoosterDetails, setBoosterMissions } from '@/store/boosterDetails';
-import { BackButtonAndPath } from '@/components/BackButtonAndPath/BackButtonAndPath';
-import FastImage from 'react-native-fast-image';
-import { StyleSheet, View } from 'react-native';
-import { Mission } from '@/types';
-import { TimeLineItem } from '@/components/TimelineItem/TimelineItem';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+} from "@/components";
+import { RootState } from "@/store";
+import { translateMonth, useFetch } from "@/utils";
+import {
+  GET_BOOSTER_DETAILS,
+  GET_BOOSTER_MISSIONS,
+} from "@/constants/queries/Booster";
+import { setBoosterDetails, setBoosterMissions } from "@/store/boosterDetails";
+import { BackButtonAndPath } from "@/components/BackButtonAndPath/BackButtonAndPath";
+import FastImage from "react-native-fast-image";
+import { StyleSheet, View } from "react-native";
+import { Mission } from "@/types";
+import { TimeLineItem } from "@/components/TimelineItem/TimelineItem";
+import SkeletonPlaceholder from "@/components/SkeletonPlaceholder/SkeletonPlaceholder";
 
 export const BoosterScreen = ({
   route,
@@ -31,8 +34,12 @@ export const BoosterScreen = ({
     variables: { boosterID: route.params.id },
   });
   const boosterMissionsResponse = useFetch(GET_BOOSTER_MISSIONS);
-  const booster = useSelector((state: RootState) => state.boosterDetails.boosterDetails);
-  const boosterMissions = useSelector((state: RootState) => state.boosterDetails.boosterMissions);
+  const booster = useSelector(
+    (state: RootState) => state.boosterDetails.boosterDetails
+  );
+  const boosterMissions = useSelector(
+    (state: RootState) => state.boosterDetails.boosterMissions
+  );
 
   useEffect(() => {
     if (response?.data) {
@@ -51,7 +58,10 @@ export const BoosterScreen = ({
         response.setLoading(true);
       }}
     >
-      <BackButtonAndPath text='BAZA WIEDZY / BOOSTERY / ' boldText={booster ? booster.name : ''} />
+      <BackButtonAndPath
+        text="BAZA WIEDZY / BOOSTERY / "
+        boldText={booster ? booster.name : ""}
+      />
 
       {booster ? (
         <RobotoBlack>{booster?.name.toUpperCase()}</RobotoBlack>
@@ -74,11 +84,15 @@ export const BoosterScreen = ({
             source={{
               uri: booster?.image?.asset.url,
             }}
-            resizeMode='cover'
+            resizeMode="cover"
           />
         ) : (
           <Placeholder>
-            <SkeletonPlaceholder.Item height={'100%'} width={'100%'} borderRadius={5} />
+            <SkeletonPlaceholder.Item
+              height={"100%"}
+              width={"100%"}
+              borderRadius={5}
+            />
           </Placeholder>
         )}
       </View>
@@ -95,39 +109,49 @@ export const BoosterScreen = ({
                 key={index}
                 date={
                   launchDate.getDate() +
-                  ' ' +
-                  translateMonth(launchDate.getMonth()).long.toLocaleLowerCase() +
-                  ' ' +
+                  " " +
+                  translateMonth(
+                    launchDate.getMonth()
+                  ).long.toLocaleLowerCase() +
+                  " " +
                   launchDate.getFullYear()
                 }
                 missionName={mission.name}
-                launchPad={'Florida, USA'}
-                landingPad={'Pacific Ocean'}
-                dottColor={'#00FF0A'}
+                launchPad={"Florida, USA"}
+                landingPad={"Pacific Ocean"}
+                dottColor={"#00FF0A"}
                 isLast={boosterMissions.length === index + 1 ? true : false}
               />
             );
           })}
           <View style={styles.propertyContainer}>
-            <RobotoLight style={styles.propertyText}>STATUS BOOSTERA:</RobotoLight>
+            <RobotoLight style={styles.propertyText}>
+              STATUS BOOSTERA:
+            </RobotoLight>
             <RobotoBold style={styles.textUppercase}>
-              {booster?.status ? booster.status : 'BRAK DANYCH'}
+              {booster?.status ? booster.status : "BRAK DANYCH"}
             </RobotoBold>
           </View>
 
           {booster?.currentLocation && (
             <View style={styles.propertyContainer}>
-              <RobotoLight style={styles.propertyText}>Miejsce przebywania:</RobotoLight>
-              <RobotoBold style={styles.textUppercase}>{booster?.currentLocation}</RobotoBold>
+              <RobotoLight style={styles.propertyText}>
+                Miejsce przebywania:
+              </RobotoLight>
+              <RobotoBold style={styles.textUppercase}>
+                {booster?.currentLocation}
+              </RobotoBold>
             </View>
           )}
 
           {booster?.currentLocation && (
             <View style={styles.propertyContainer}>
-              <RobotoLight style={styles.propertyText}>Dodatkowe informacje:</RobotoLight>
+              <RobotoLight style={styles.propertyText}>
+                Dodatkowe informacje:
+              </RobotoLight>
               <RobotoBold style={styles.textUppercase}>Ciekawostki</RobotoBold>
               {booster?.facts?.map((fact) => {
-                if (fact === '') {
+                if (fact === "") {
                   return null;
                 }
                 return (
@@ -146,14 +170,14 @@ export const BoosterScreen = ({
 
 const styles = StyleSheet.create({
   boosterImageContainer: {
-    width: '100%',
+    width: "100%",
     height: 250,
     borderRadius: 10,
     marginTop: 15,
   },
   boosterImage: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   completedMissionText: {
     marginTop: 60,
@@ -161,16 +185,16 @@ const styles = StyleSheet.create({
   },
   propertyContainer: { marginTop: 20 },
 
-  propertyText: { color: '#6D6D6D', fontSize: 14 },
+  propertyText: { color: "#6D6D6D", fontSize: 14 },
 
   textUppercase: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     fontSize: 40,
   },
 
   factContainer: {
-    width: '100%',
-    borderBottomColor: 'rgba(109, 109, 109, 0.2)',
+    width: "100%",
+    borderBottomColor: "rgba(109, 109, 109, 0.2)",
     borderBottomWidth: 1,
     paddingVertical: 15,
   },
@@ -181,6 +205,6 @@ const styles = StyleSheet.create({
   },
 
   titlePlaceholder: {
-    width: '100%',
+    width: "100%",
   },
 });

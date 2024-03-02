@@ -5,7 +5,6 @@ import { SectionPreview } from "@/components/SectionPreview/SectionPreview";
 import { GET_INCOMING_LAUNCH } from "@/constants/queries/HomePage";
 import { RocketLaunchesStackParamList } from "@/navigation/Stacks/Launches";
 import { useFetch } from "@/utils";
-import { Text } from "react-native";
 // import { Button } from "react-native";
 // import notifee from '@notifee/react-native';
 // import { LogLevel, OneSignal } from "react-native-onesignal";
@@ -69,7 +68,6 @@ export const HomeScreen = ({
         mission.refetch();
       }}
     >
-      <Text>Test</Text>
       {/* <Button
         title="Display Notification"
         onPress={() => onDisplayNotification()}

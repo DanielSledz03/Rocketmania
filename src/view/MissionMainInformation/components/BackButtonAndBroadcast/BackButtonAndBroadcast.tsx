@@ -1,11 +1,16 @@
-import { Livestream, NoLiveBroadcast, RecordOfTheBroadcast, UpcomingBroadcast } from './Broadcasts';
-import { memo, useEffect, useState } from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { useDispatch, useSelector } from 'react-redux';
-import { Placeholder } from '@/components';
-import { missionsDetailsSliceActions, RootState } from '@/store';
-import { SCREEN_HEIGHT } from '@/utils';
+import {
+  Livestream,
+  NoLiveBroadcast,
+  RecordOfTheBroadcast,
+  UpcomingBroadcast,
+} from "./Broadcasts";
+import { memo, useEffect, useState } from "react";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { Placeholder } from "@/components";
+import { missionsDetailsSliceActions, RootState } from "@/store";
+import { SCREEN_HEIGHT } from "@/utils";
+import SkeletonPlaceholder from "@/components/SkeletonPlaceholder/SkeletonPlaceholder";
 
 interface BackButtonAndBroadcastProps {
   navigateBack: () => void;
@@ -18,11 +23,13 @@ export const BackButtonAndBroadcast = memo(function BackButtonAndBroadcast({
 }: BackButtonAndBroadcastProps) {
   const [broadcastElement, setBroadcastElement] = useState<JSX.Element>();
   const livestreamUrl = useSelector(
-    (state: RootState) => state.missionDetails.missionDetails?.livestream,
+    (state: RootState) => state.missionDetails.missionDetails?.livestream
   );
-  const livestreamStatus = useSelector((state: RootState) => state.missionDetails.livestreamStatus);
+  const livestreamStatus = useSelector(
+    (state: RootState) => state.missionDetails.livestreamStatus
+  );
   const livestreamScheduledDate = useSelector(
-    (state: RootState) => state.missionDetails.livestreamDate,
+    (state: RootState) => state.missionDetails.livestreamDate
   );
 
   const dispatch = useDispatch();
@@ -37,16 +44,21 @@ export const BackButtonAndBroadcast = memo(function BackButtonAndBroadcast({
       setBroadcastElement,
       livestreamUrl,
       livestreamScheduledDate,
-      handleLivestreamClick,
+      handleLivestreamClick
     );
-  }, [livestreamStatus, livestreamUrl, livestreamScheduledDate, handleLivestreamClick]);
+  }, [
+    livestreamStatus,
+    livestreamUrl,
+    livestreamScheduledDate,
+    handleLivestreamClick,
+  ]);
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={navigateBack} style={styles.goBackContainer}>
         <Image
-          source={require('@/assets/images/back.png')}
-          resizeMode='contain'
+          source={require("@/assets/images/back.png")}
+          resizeMode="contain"
           style={styles.goBackIcon}
         />
       </TouchableOpacity>
@@ -56,34 +68,45 @@ export const BackButtonAndBroadcast = memo(function BackButtonAndBroadcast({
   );
 });
 
-async function fetchLivestreamData(livestreamUrl: string | undefined, dispatch: any) {
+async function fetchLivestreamData(
+  livestreamUrl: string | undefined,
+  dispatch: any
+) {
   if (livestreamUrl) {
-    dispatch(missionsDetailsSliceActions.setLivestreamStatus('loading'));
+    dispatch(missionsDetailsSliceActions.setLivestreamStatus("loading"));
 
     try {
       const response = await fetch(
         `https://www.googleapis.com/youtube/v3/videos?part=snippet,liveStreamingDetails&id=${livestreamUrl.slice(
-          32,
-        )}&key=AIzaSyBgfoTlMxtExkw5Hvlxq_e413EvV-sg9n8`,
+          32
+        )}&key=AIzaSyBgfoTlMxtExkw5Hvlxq_e413EvV-sg9n8`
       );
       const data = await response.json();
 
-      if (data.items[0].liveStreamingDetails?.scheduledStartTime !== undefined) {
+      if (
+        data.items[0].liveStreamingDetails?.scheduledStartTime !== undefined
+      ) {
         dispatch(
           missionsDetailsSliceActions.setLivestreamDate(
-            data.items[0].liveStreamingDetails.scheduledStartTime,
-          ),
+            data.items[0].liveStreamingDetails.scheduledStartTime
+          )
         );
       }
       dispatch(
-        missionsDetailsSliceActions.setLivestreamStatus(data.items[0].snippet.liveBroadcastContent),
+        missionsDetailsSliceActions.setLivestreamStatus(
+          data.items[0].snippet.liveBroadcastContent
+        )
       );
     } catch (error) {
       console.error(error);
-      dispatch(missionsDetailsSliceActions.setLivestreamStatus('NoLiveBroadcast'));
+      dispatch(
+        missionsDetailsSliceActions.setLivestreamStatus("NoLiveBroadcast")
+      );
     }
   } else {
-    dispatch(missionsDetailsSliceActions.setLivestreamStatus('NoLiveBroadcast'));
+    dispatch(
+      missionsDetailsSliceActions.setLivestreamStatus("NoLiveBroadcast")
+    );
   }
 }
 
@@ -92,10 +115,10 @@ function setBroadcastElementBasedOnStatus(
   setBroadcastElement: any,
   livestreamUrl: string | undefined,
   livestreamScheduledDate: string | undefined,
-  handleLivestreamClick: () => void,
+  handleLivestreamClick: () => void
 ) {
   switch (livestreamStatus) {
-    case 'loading':
+    case "loading":
       setBroadcastElement(
         <Placeholder>
           <SkeletonPlaceholder.Item
@@ -103,23 +126,29 @@ function setBroadcastElementBasedOnStatus(
             height={35}
             width={200}
           ></SkeletonPlaceholder.Item>
-        </Placeholder>,
+        </Placeholder>
       );
       break;
 
-    case 'upcoming':
+    case "upcoming":
       setBroadcastElement(
-        <UpcomingBroadcast streamLink={livestreamUrl} streamDate={livestreamScheduledDate} />,
+        <UpcomingBroadcast
+          streamLink={livestreamUrl}
+          streamDate={livestreamScheduledDate}
+        />
       );
       break;
 
-    case 'none':
+    case "none":
       setBroadcastElement(<RecordOfTheBroadcast streamLink={livestreamUrl} />);
       break;
 
-    case 'live':
+    case "live":
       setBroadcastElement(
-        <Livestream streamLink={livestreamUrl} onPress={handleLivestreamClick} />,
+        <Livestream
+          streamLink={livestreamUrl}
+          onPress={handleLivestreamClick}
+        />
       );
       break;
 
@@ -130,32 +159,32 @@ function setBroadcastElementBasedOnStatus(
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
     height: SCREEN_HEIGHT * 0.08,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 20,
   },
 
   broadcastButtonPlaceholder: {
-    width: '60%',
-    height: '60%',
+    width: "60%",
+    height: "60%",
     borderRadius: 5,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'row',
+    justifyContent: "space-around",
+    alignItems: "center",
+    flexDirection: "row",
     padding: 0,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
 
   goBackContainer: {
-    height: '70%',
-    width: '10%',
+    height: "70%",
+    width: "10%",
   },
 
   goBackIcon: {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   },
 });

@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import { ReactNode } from "react";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import SkeletonPlaceholder from "../SkeletonPlaceholder/SkeletonPlaceholder";
 
 interface PlaceholderProps {
   style?: StyleProp<ViewStyle>;
@@ -11,8 +11,8 @@ export const Placeholder = ({ style, children }: PlaceholderProps) => {
   return (
     <View style={[styles.container, style]}>
       <SkeletonPlaceholder
-        highlightColor='#333333'
-        backgroundColor='rgba(39, 39, 40, 1)'
+        highlightColor="#333333"
+        backgroundColor="rgba(39, 39, 40, 1)"
         speed={1600}
         shimmerWidth={400}
         enabled
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   skeletonContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
 });

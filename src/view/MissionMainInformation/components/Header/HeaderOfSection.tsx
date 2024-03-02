@@ -1,47 +1,49 @@
-import { RobotoBold, RobotoMedium } from '@components/texts';
-import { StyleSheet } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { useSelector } from 'react-redux';
-import { AnimatedView, CountdownWithStatus, Placeholder } from '@/components';
-import { RootState } from '@/store';
-import { SCREEN_HEIGHT } from '@/utils';
+import { RobotoBold, RobotoMedium } from "@components/texts";
+import { StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
+import { AnimatedView, CountdownWithStatus, Placeholder } from "@/components";
+import { RootState } from "@/store";
+import { SCREEN_HEIGHT } from "@/utils";
+import SkeletonPlaceholder from "@/components/SkeletonPlaceholder/SkeletonPlaceholder";
 
 export const HeaderOfSection = () => {
-  const missionDetails = useSelector((state: RootState) => state.missionDetails.missionDetails);
+  const missionDetails = useSelector(
+    (state: RootState) => state.missionDetails.missionDetails
+  );
   if (!missionDetails) {
     return (
       <Placeholder>
         <SkeletonPlaceholder.Item
           borderRadius={5}
           height={20}
-          width={'80%'}
+          width={"80%"}
           marginBottom={10}
         ></SkeletonPlaceholder.Item>
 
         <SkeletonPlaceholder.Item
           borderRadius={5}
           height={30}
-          width={'70%'}
+          width={"70%"}
           marginBottom={30}
         ></SkeletonPlaceholder.Item>
         <SkeletonPlaceholder.Item
           borderRadius={5}
           height={30}
-          width={'70%'}
+          width={"70%"}
           marginBottom={40}
         ></SkeletonPlaceholder.Item>
 
         <SkeletonPlaceholder.Item
           borderRadius={5}
           height={30}
-          width={'45%'}
+          width={"45%"}
           marginBottom={30}
         ></SkeletonPlaceholder.Item>
 
         <SkeletonPlaceholder.Item
           borderRadius={5}
           height={20}
-          width={'55%'}
+          width={"55%"}
         ></SkeletonPlaceholder.Item>
       </Placeholder>
     );
@@ -50,9 +52,14 @@ export const HeaderOfSection = () => {
   return (
     <AnimatedView style={styles.container}>
       <RobotoMedium style={styles.text}>
-        MISJA: <RobotoMedium style={styles.missionName}>{missionDetails.name}</RobotoMedium>
+        MISJA:{" "}
+        <RobotoMedium style={styles.missionName}>
+          {missionDetails.name}
+        </RobotoMedium>
       </RobotoMedium>
-      <RobotoBold style={styles.rocketName}>{missionDetails.rocket.name}</RobotoBold>
+      <RobotoBold style={styles.rocketName}>
+        {missionDetails.rocket.name}
+      </RobotoBold>
       <CountdownWithStatus
         targetDate={missionDetails.date}
         missionStatus={missionDetails.status}
@@ -67,18 +74,18 @@ export const HeaderOfSection = () => {
 const styles = StyleSheet.create({
   container: { opacity: 1 },
 
-  rocketName: { width: '85%', textTransform: 'uppercase' },
+  rocketName: { width: "85%", textTransform: "uppercase" },
 
   text: {
-    color: '#6D6D6D',
+    color: "#6D6D6D",
     fontSize: 16,
   },
 
   missionName: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
 
-  countdown: { height: SCREEN_HEIGHT * 0.25, width: '100%' },
+  countdown: { height: SCREEN_HEIGHT * 0.25, width: "100%" },
 
   countdownStyles: {
     marginTop: 10,
@@ -87,7 +94,7 @@ const styles = StyleSheet.create({
 
   placeholderOfSection: {
     flex: 1,
-    justifyContent: 'center',
-    overflow: 'hidden',
+    justifyContent: "center",
+    overflow: "hidden",
   },
 });

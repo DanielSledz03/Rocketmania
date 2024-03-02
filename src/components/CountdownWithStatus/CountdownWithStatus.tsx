@@ -1,7 +1,7 @@
-import { Countdown } from './components/Countdown';
-import { TimeLineItem } from './components/TimelineItem';
-import { RobotoLight, RobotoMedium, SpaceGroteskBold } from '@components/texts';
-import { useState } from 'react';
+import { Countdown } from "./components/Countdown";
+import { TimeLineItem } from "./components/TimelineItem";
+import { RobotoLight, RobotoMedium, SpaceGroteskBold } from "@components/texts";
+import { useState } from "react";
 import {
   Animated,
   Image,
@@ -11,9 +11,9 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from 'react-native';
-import { moderateScale } from 'react-native-size-matters';
-import { getFormattedLaunchDate, StatusProps } from '@/utils';
+} from "react-native";
+import { moderateScale } from "react-native-size-matters";
+import { getFormattedLaunchDate, StatusProps } from "@/utils";
 
 interface CountdownWithStatusProps {
   targetDate: Date;
@@ -24,7 +24,8 @@ interface CountdownWithStatusProps {
 }
 
 export const CountdownWithStatus = (props: CountdownWithStatusProps) => {
-  const { targetDate, style, countdownStyles, missionStatus, changeLogs } = props;
+  const { targetDate, style, countdownStyles, missionStatus, changeLogs } =
+    props;
   const [isExpanded, setIsExpanded] = useState(false);
   const missionDate = new Date(targetDate);
 
@@ -33,8 +34,8 @@ export const CountdownWithStatus = (props: CountdownWithStatusProps) => {
         return (
           <TimeLineItem
             key={index}
-            date={item.split(': ')[0]}
-            text={item.split(': ')[1]}
+            date={item.split(": ")[0]}
+            text={item.split(": ")[1]}
             isLast={index + 1 === array.length ? true : false}
           />
         );
@@ -58,7 +59,10 @@ export const CountdownWithStatus = (props: CountdownWithStatusProps) => {
             </View>
             <View style={styles.fullWidth}>
               <SpaceGroteskBold
-                style={[styles.status, { color: StatusProps(missionStatus).color }]}
+                style={[
+                  styles.status,
+                  { color: StatusProps(missionStatus).color },
+                ]}
               >
                 {StatusProps(missionStatus).text}
               </SpaceGroteskBold>
@@ -76,14 +80,16 @@ export const CountdownWithStatus = (props: CountdownWithStatusProps) => {
               <RobotoLight style={styles.missionDate}>Data startu</RobotoLight>
             </View>
             <View style={styles.dateBox}>
-              <RobotoMedium>{getFormattedLaunchDate(missionDate, missionStatus).text}</RobotoMedium>
+              <RobotoMedium>
+                {getFormattedLaunchDate(missionDate, missionStatus).text}
+              </RobotoMedium>
               {changeLogs && (
                 <Image
-                  resizeMode='contain'
+                  resizeMode="contain"
                   source={
                     isExpanded
-                      ? require('@/assets/images/expand/expandRotated.png')
-                      : require('@/assets/images/expand/expand.png')
+                      ? require("@/assets/images/expand/expandRotated.png")
+                      : require("@/assets/images/expand/expand.png")
                   }
                   style={styles.icon}
                 />
@@ -95,7 +101,9 @@ export const CountdownWithStatus = (props: CountdownWithStatusProps) => {
       {changeLogs && (
         <Animated.View
           style={{
-            height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
+            height: LayoutAnimation.configureNext(
+              LayoutAnimation.Presets.easeInEaseOut
+            ),
           }}
         >
           {isExpanded && changeLogsArray}
@@ -107,59 +115,59 @@ export const CountdownWithStatus = (props: CountdownWithStatusProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
 
-  countdown: { height: 45, marginBottom: '5%' },
+  countdown: { height: 45, marginBottom: "5%" },
 
   fullWidth: {
-    width: '100%',
+    width: "100%",
   },
 
   uppercase: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
 
-  line: { height: 1, width: 25, backgroundColor: 'gray', marginRight: 10 },
+  line: { height: 1, width: 25, backgroundColor: "gray", marginRight: 10 },
 
   statusAndDateBox: {
-    width: '100%',
-    height: '55%',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
+    width: "100%",
+    height: "55%",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "space-around",
     paddingHorizontal: 10,
   },
 
   missionStatusBox: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     marginBottom: 2,
   },
 
   status: {
-    fontWeight: '700',
+    fontWeight: "700",
     fontSize: moderateScale(22),
   },
 
   missionDateContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     marginBottom: 2,
   },
 
   missionDate: {
-    textTransform: 'uppercase',
-    color: 'white',
+    textTransform: "uppercase",
+    color: "white",
   },
 
   dateBox: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
   },
 
   icon: { width: 15, height: 15, marginLeft: 10 },

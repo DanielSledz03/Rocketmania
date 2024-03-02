@@ -1,9 +1,9 @@
-import { Placeholder } from '../Placeholder/Placeholder';
-import { RobotoLight } from '../texts';
-import { useNavigation } from '@react-navigation/native';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SCREEN_HEIGHT } from '@/utils';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import { Placeholder } from "../Placeholder/Placeholder";
+import { RobotoLight } from "../texts";
+import { useNavigation } from "@react-navigation/native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { SCREEN_HEIGHT } from "@/utils";
+import SkeletonPlaceholder from "../SkeletonPlaceholder/SkeletonPlaceholder";
 
 interface IProps {
   text: string;
@@ -14,10 +14,13 @@ export const BackButtonAndPath = ({ text, boldText }: IProps) => {
   const navigation = useNavigation();
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.backButton}
+      >
         <Image
-          source={require('../../assets/images/back.png')}
-          resizeMode='contain'
+          source={require("../../assets/images/back.png")}
+          resizeMode="contain"
           style={styles.backButtonIcon}
         />
       </TouchableOpacity>
@@ -26,12 +29,18 @@ export const BackButtonAndPath = ({ text, boldText }: IProps) => {
         {boldText ? (
           <RobotoLight style={styles.text1}>
             {text}
-            <RobotoLight style={styles.rocketNameInPath}>{boldText}</RobotoLight>
+            <RobotoLight style={styles.rocketNameInPath}>
+              {boldText}
+            </RobotoLight>
           </RobotoLight>
         ) : (
           <Placeholder style={styles.skeletonContent}>
             <View style={styles.skeletonContent}>
-              <SkeletonPlaceholder.Item height={'100%'} width={'100%'} borderRadius={5} />
+              <SkeletonPlaceholder.Item
+                height={"100%"}
+                width={"100%"}
+                borderRadius={5}
+              />
             </View>
           </Placeholder>
         )}
@@ -42,46 +51,46 @@ export const BackButtonAndPath = ({ text, boldText }: IProps) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    width: '100%',
+    width: "100%",
     height: SCREEN_HEIGHT * 0.08,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 10,
   },
 
   backButton: {
-    height: '70%',
-    width: '10%',
+    height: "70%",
+    width: "10%",
   },
 
   backButtonIcon: {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   },
 
   pathContainer: {
-    width: '85%',
-    height: '60%',
-    justifyContent: 'space-around',
-    alignItems: 'flex-end',
+    width: "85%",
+    height: "60%",
+    justifyContent: "space-around",
+    alignItems: "flex-end",
   },
 
   text1: {
     fontSize: 11,
-    color: 'rgba(109, 109, 109, 1)',
-    textTransform: 'uppercase',
+    color: "rgba(109, 109, 109, 1)",
+    textTransform: "uppercase",
   },
 
   rocketNameInPath: {
-    color: 'rgba(109, 109, 109, 1)',
-    fontWeight: '800',
+    color: "rgba(109, 109, 109, 1)",
+    fontWeight: "800",
     fontSize: 11,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
 
   skeletonContent: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
 });

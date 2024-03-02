@@ -1,40 +1,36 @@
-import { BroadcastStyle } from './BroadcastStyle';
-import { IBroadcast } from './intreface';
-import Countdown from 'react-countdown';
-import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { RobotoBold } from '@/components/texts';
+import { Linking, StyleSheet, TouchableOpacity, View } from "react-native";
+import { RobotoBold } from "@/components/texts";
+import useCountdown from "@/hooks/useCountdown";
+import { BroadcastStyle } from "./BroadcastStyle";
+import { IBroadcast } from "./interface";
 
-export const UpcomingBroadcast = ({ streamDate, streamLink = '' }: IBroadcast) => {
+export const UpcomingBroadcast = ({
+  streamDate,
+  streamLink = "",
+}: IBroadcast) => {
+  const { hours, minutes, seconds } = useCountdown(streamDate || "").timeLeft;
+
   return (
     <TouchableOpacity
       onPress={() => Linking.openURL(streamLink)}
       style={[BroadcastStyle.container, styles.container]}
     >
-      <Countdown
-        date={streamDate}
-        renderer={({ hours, minutes, seconds }) => {
-          return (
-            <View style={BroadcastStyle.centerElement}>
-              <RobotoBold style={[BroadcastStyle.text, styles.text]}>
-                Live zacznie się za: {hours < 10 ? '0' + hours : hours}:
-                {minutes < 10 ? '0' + minutes : minutes}:{seconds < 10 ? '0' + seconds : seconds}
-              </RobotoBold>
-            </View>
-          );
-        }}
-      />
+      <View style={BroadcastStyle.centerElement}>
+        <RobotoBold style={[BroadcastStyle.text, styles.text]}>
+          Live zacznie się za: {hours}:{minutes}:{seconds}
+        </RobotoBold>
+      </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent", // If this doesn't conflict with BroadcastStyle.container, consider merging.
     borderWidth: 1,
-    borderColor: '#FF0000',
+    borderColor: "#FF0000",
   },
-
   text: {
-    color: '#FF0000',
+    color: "#FF0000", // Same as above for text styles.
   },
 });
