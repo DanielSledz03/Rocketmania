@@ -1,9 +1,9 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_INCOMING_LAUNCH = gql(`
 {
   allMission(
-    where: { archived: { eq: false } }
+    where: { archived: { eq: false }, environment: { eq: "production" } }
     limit: 1
     sort: [{ date: ASC }]
   ) {
@@ -23,13 +23,14 @@ export const GET_INCOMING_LAUNCH = gql(`
 
     _id
   }
-} 
+}
+
     `);
 
 export const GET_ALL_LAUNCHES = gql(`
 query GetMissions($limit: Int){
   allMission(
-    where: { archived: { eq: false } }
+    where: { archived: { eq: false }, environment: {eq: "production"} }
     sort: [{ date: ASC }]
     limit: $limit
   ) {
@@ -45,13 +46,15 @@ query GetMissions($limit: Int){
           url
         }
       }
-      agency {
+      Agencies{
         name
       }
+     
     }
     _id
   }
-}
+}# Write your query or mutation here
+
 
     `);
 

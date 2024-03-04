@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_BOOSTER_DETAILS = gql(`
 query getBoosterDetails($boosterID: ID) {
@@ -24,7 +24,7 @@ export const GET_BOOSTER_MISSIONS = gql(`
   allMission(where: { rocket: { name: { eq: "Falcon 9 Block 5" } } }) {
     name
     date
-    launchPad
+    
     landingPad{
       landingPad
       boosterName

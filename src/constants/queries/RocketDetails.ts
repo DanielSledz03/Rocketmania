@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_ROCKET_DETAILS = gql(`
 query getRocketByID($id: ID) {
@@ -13,8 +13,7 @@ query getRocketByID($id: ID) {
     }
     successfull_launches
     failed_launches
-    partial_failed_launches
-    partial_successfull_launches
+    
     image {
       asset {
         url
@@ -27,7 +26,7 @@ query getRocketByID($id: ID) {
         }
       }
     }
-    agency {
+    Agencies {
       _id
       name
     }
@@ -60,7 +59,11 @@ query getRocketByID($id: ID) {
 export const GET_ROCKET_LAST_LAUNCHES = gql(`
 query getLastRocketLaunches($rocketId: ID) {
   allMission(
-    where: { rocket: { _id: { eq: $rocketId } }, archived: { eq: true } }
+    where: {
+      rocket: { _id: { eq: $rocketId } }
+      archived: { eq: true }
+      environment: { eq: "production" }
+    }
     sort: [{ date: ASC }]
   ) {
     name
@@ -69,4 +72,5 @@ query getLastRocketLaunches($rocketId: ID) {
     _id
   }
 }
+
 `);

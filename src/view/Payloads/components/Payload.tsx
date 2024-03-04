@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LayoutAnimation, StyleSheet, View } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 import { AnimatedImage, ButtonExpand } from '@/components';
@@ -7,43 +7,40 @@ import { Payload as IPayload } from '@/types';
 import { SCREEN_HEIGHT } from '@/utils';
 import { PropertiesList } from '@/view';
 
-export const Payload = ({ payload }: { payload: IPayload }) => {
-  const [expanded, setExpanded] = useState(false);
+export const Payload = ({ payload, defaultExpand }: { payload: IPayload, defaultExpand?: boolean }) => {
+  const [expanded, setExpanded] = useState(defaultExpand);
+
+  useEffect(() => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  }, [expanded]);
+
+  const toggleExpand = () => !defaultExpand &&setExpanded(!expanded);
+  
 
   return (
     <View style={styles.container}>
-      {payload.role === 'main_payload' ? (
-        <RobotoMedium style={styles.role}>ŁADUNEK GŁÓWNY</RobotoMedium>
-      ) : (
-        <RobotoMedium style={styles.role}>ŁADUNEK DODATKOWY</RobotoMedium>
-      )}
+      <RobotoMedium style={styles.role}>
+        {payload.role === 'main_payload' ? 'ŁADUNEK GŁÓWNY' : 'ŁADUNEK DODATKOWY'}
+      </RobotoMedium>
       <RobotoBold style={styles.payloadName}>{payload.name}</RobotoBold>
       {payload.image?.asset.url && expanded && (
         <AnimatedImage
           style={styles.payloadPhoto}
           resizeMode='cover'
-          source={{
-            uri: payload.image?.asset.url,
-          }}
+          source={{ uri: payload.image.asset.url }}
         />
       )}
-      <View
-        style={{
-          height: LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut),
-        }}
-      >
-        {expanded && (
-          <>
-            {payload.specification && <PropertiesList list={payload.specification?.split('\n')} />}
-            <RobotoMedium style={styles.description}>{payload.description}</RobotoMedium>
-          </>
-        )}
-      </View>
-      <ButtonExpand
+      {expanded && (
+        <View>
+          {payload.specification && <PropertiesList list={payload.specification.split('\n')} />}
+          <RobotoMedium style={styles.description}>{payload.description}</RobotoMedium>
+        </View>
+      )}
+   {!defaultExpand &&   <ButtonExpand
         isExpand={expanded}
-        setIsExpand={setExpanded}
+        setIsExpand={toggleExpand}
         style={{ marginTop: expanded ? moderateScale(30) : moderateScale(10) }}
-      />
+      />}
     </View>
   );
 };
@@ -54,22 +51,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 10,
   },
-
   payloadName: {
     fontSize: 40,
     textTransform: 'uppercase',
     marginBottom: 15,
   },
-
   payloadPhoto: {
     width: '100%',
     height: SCREEN_HEIGHT * 0.25,
     borderRadius: 10,
     marginTop: 10,
-    position: 'relative',
     marginBottom: 20,
   },
-
   description: {
     marginTop: 10,
     fontSize: moderateScale(13),
@@ -77,10 +70,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: 'white',
   },
-
   role: {
     color: 'rgba(109, 109, 109, 1)',
     fontSize: moderateScale(14),
     textTransform: 'uppercase',
   },
+ 
 });

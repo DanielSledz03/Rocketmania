@@ -4,6 +4,7 @@ import { MainTemplate } from "@/components/MainTemplate/MainTemplate";
 import { SectionPreview } from "@/components/SectionPreview/SectionPreview";
 import { GET_INCOMING_LAUNCH } from "@/constants/queries/HomePage";
 import { RocketLaunchesStackParamList } from "@/navigation/Stacks/Launches";
+import Config from "react-native-config";
 import { useFetch } from "@/utils";
 // import { Button } from "react-native";
 // import notifee from '@notifee/react-native';
@@ -60,6 +61,8 @@ export const HomeScreen = ({
   //   });
   // }
 
+  console.log(Config.API_URL);
+
   return (
     <MainTemplate
       refreshing={mission.loading}
@@ -78,11 +81,12 @@ export const HomeScreen = ({
         buttonTitle="Kolejne starty »"
         buttonOnPress={() => navigation.navigate("MissionsQueque")}
         additionalButton
-        additionalButtonOnPress={() =>
+        additionalButtonOnPress={() => {
           navigation.navigate("LaunchDetails", {
             id: mission.data?.allMission[0]._id,
-          })
-        }
+          });
+          console.log(mission.data?.allMission[0]._id);
+        }}
       />
 
       <SectionPreview
