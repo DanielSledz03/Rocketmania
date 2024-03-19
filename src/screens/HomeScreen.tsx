@@ -4,7 +4,6 @@ import { MainTemplate } from "@/components/MainTemplate/MainTemplate";
 import { SectionPreview } from "@/components/SectionPreview/SectionPreview";
 import { GET_INCOMING_LAUNCH } from "@/constants/queries/HomePage";
 import { RocketLaunchesStackParamList } from "@/navigation/Stacks/Launches";
-import Config from "react-native-config";
 import { useFetch } from "@/utils";
 // import { Button } from "react-native";
 // import notifee from '@notifee/react-native';
@@ -61,7 +60,7 @@ export const HomeScreen = ({
   //   });
   // }
 
-  console.log(Config.API_URL);
+  console.log(process.env.API_URL);
 
   return (
     <MainTemplate
