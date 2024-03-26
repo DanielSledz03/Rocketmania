@@ -1,4 +1,4 @@
-package com.rakietomania
+package com.danielsledz.rakietomaniaapp
 
 import android.app.Application
 import com.facebook.react.PackageList

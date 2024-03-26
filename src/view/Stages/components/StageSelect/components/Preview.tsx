@@ -1,8 +1,8 @@
-import { StyleSheet, View } from 'react-native';
-import { AnimatedImage, AnimatedView } from '@/components';
-import { RobotoBold, RobotoLight, RobotoMedium } from '@/components/texts';
-import { SCREEN_HEIGHT } from '@/utils';
-import { PropertiesList } from '@/view/PropertiesList/PropertiesList';
+import { StyleSheet, View } from "react-native";
+import { AnimatedImage, AnimatedView } from "@/components";
+import { RobotoBold, RobotoLight, RobotoMedium } from "@/components/texts";
+import { SCREEN_HEIGHT } from "@/utils";
+import { PropertiesList } from "@/view/PropertiesList/PropertiesList";
 
 interface IProps {
   selectedValue: {
@@ -20,37 +20,47 @@ export const PreviewStageSelect = ({ selectedValue }: IProps) => {
     <AnimatedView style={styles.previewContainer}>
       <View style={{ marginBottom: 15 }}>
         <RobotoLight style={styles.engineText}>STOPIEŃ RAKIETY</RobotoLight>
-        <RobotoBold style={styles.textUppercase}>{selectedValue.Name}</RobotoBold>
+        <RobotoBold style={styles.textUppercase}>
+          {selectedValue.Name}
+        </RobotoBold>
       </View>
       {selectedValue.Photo?.url && (
         <AnimatedImage
           source={{
             uri: selectedValue.Photo.url,
           }}
+          resizeMode="contain"
           style={styles.image}
         />
       )}
-      <PropertiesList containerStyle={styles.propertiesList} list={selectedValue.Specification} />
-      <RobotoMedium style={styles.description}>{selectedValue.Description}</RobotoMedium>
+      <PropertiesList
+        containerStyle={styles.propertiesList}
+        list={selectedValue.Specification}
+      />
+      <RobotoMedium style={styles.description}>
+        {selectedValue.Description}
+      </RobotoMedium>
     </AnimatedView>
   );
 };
 
 const styles = StyleSheet.create({
   previewContainer: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     marginTop: 30,
   },
 
   image: {
-    width: '100%',
+    width: "100%",
     height: SCREEN_HEIGHT * 0.3,
-    position: 'relative',
+    position: "relative",
+    borderRadius: 10,
+    overflow: "hidden",
   },
 
   propertiesList: {
     marginVertical: 20,
-    borderTopColor: 'rgba(109, 109, 109, 0.2)',
+    borderTopColor: "rgba(109, 109, 109, 0.2)",
     borderWidth: 1,
   },
 
@@ -60,8 +70,8 @@ const styles = StyleSheet.create({
   },
 
   textUppercase: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
 
-  engineText: { color: '#6D6D6D', fontSize: 15 },
+  engineText: { color: "#6D6D6D", fontSize: 15 },
 });

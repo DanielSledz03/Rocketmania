@@ -44,6 +44,7 @@ export const TabNavigation = () => {
             component={RocketLaunchesStack}
             name="RocketLaunchesStack"
           />
+
           <Tab.Screen component={StarshipStack} name="StarshipStack" />
         </Tab.Navigator>
       </SafeAreaView>

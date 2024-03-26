@@ -1,4 +1,4 @@
-package com.rakietomania
+package com.danielsledz.rakietomaniaapp
 
 import android.os.Bundle
 import com.facebook.react.ReactActivity

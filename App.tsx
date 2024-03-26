@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { Platform, Text, UIManager } from "react-native";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
 import { Provider } from "react-redux";
+import { LogLevel, OneSignal } from "react-native-onesignal";
 
 import { TabNavigation } from "@/navigation/TabNavigation/TabNavigation";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -70,6 +71,23 @@ function App(): JSX.Element {
   useEffect(() => {
     changeNavigationBarColor("black");
   }, []);
+
+  // Remove this method to stop OneSignal Debugging
+  OneSignal.Debug.setLogLevel(LogLevel.Verbose);
+
+  // OneSignal Initialization
+  OneSignal.initialize("ec72127d-65c5-4b9a-a08d-c7e4de1ec582");
+
+  OneSignal.User.addTag("tag", "Starship");
+
+  // requestPermission will show the native iOS or Android notification permission prompt.
+  // We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.Notifications.requestPermission(true);
+
+  // Method for listening for notification clicks
+  OneSignal.Notifications.addEventListener("click", (event) => {
+    console.log("OneSignal: notification clicked:", event);
+  });
 
   return (
     <ApolloProvider client={client}>

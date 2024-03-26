@@ -7,10 +7,7 @@ query getRocketByID($id: ID) {
     name
     description
     generalInformations
-    carrying_capacity {
-      name
-      value
-    }
+    carrying_capacity 
     successfull_launches
     failed_launches
     

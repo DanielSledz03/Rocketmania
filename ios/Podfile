@@ -25,6 +25,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+
 target 'Rakietomania' do
   config = use_native_modules!
 
@@ -52,4 +53,8 @@ target 'Rakietomania' do
       :mac_catalyst_enabled => false
     )
   end
+end
+
+target 'OneSignalNotificationServiceExtension' do
+  pod 'OneSignalXCFramework', '>= 5.0.0', '< 6.0'
 end
